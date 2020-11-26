@@ -16,11 +16,13 @@ app.use(cors({
 }));
 
 //routes
-// const routes = require('./routes');
+const routes = require('./routes');
 
 app.get('/', (req,res) => res.send('API running'))
 
-// app.use('/recipients', routes.recipients);
-// app.use('/gifts', routes.gifts);
+app.use('/recipients', routes.recipients);
+app.use('/gifts', routes.gifts);
+app.use('/users', routes.users);
+app.use('/auth', routes.auth);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
