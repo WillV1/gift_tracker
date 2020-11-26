@@ -1,28 +1,28 @@
 const express = require('express');
 const db = require('../models')
 const { check, validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
+const { User } = require('../models');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  db.User.find({})
-  .then((foundUser) => {
-    res.json({users: foundUser})
-  })
-  .catch((err) => {
-    console.log('Error on index.route', err);
-    res.json({Error: 'Unable to retrieve user'})
-  })
+router.get('/', async (req, res) => {
+  try {
+    const result = await db.User.find({})
+    res.json({result})
+  } catch (err) {
+      console.log('Error on index.route', err);
+      res.json({Error: 'Unable to retrieve user'})
+  }
 });
 
-router.get('/:id', (req, res) => {
-  db.User.findById(req.params.id)
-  .then((foundUser) => {
-    res.json({user: foundUser})
-  })
-  .catch((err) => {
-    console.log('Error on show route', err)
-    res.json({Error: 'Unable to retrieve data'})
-  })
+router.get('/:id', async (req, res) => {
+  try {
+    const result = await db.User.findById(req.params.id)
+    res.json({result})
+  } catch (err) {
+      console.log('Error on show.route', err);
+      res.json({Error: 'Unable to retrieve user'})
+  }
 });
 
 router.post('/', [
@@ -42,19 +42,25 @@ router.post('/', [
   //user registration (see if user exists, encrypt password, return jsonwebtoken)
 
   try { 
+    let user = await db.User.findOne({email});
+    if(user) {
+      return res.status(400).json({errors: [{ msg: 'User already exists'}]});
+    }
 
-    db.User.create(req.body)
-    .then((savedUser) => {
-      res.json({user: savedUser})
-    }) 
-    .catch((err) => {
-      console.log('Error in create route', err)
-      res.json({Error: 'Unable to save data'})
-    })
+    user = new User({
+      name, email, password
+    });
+
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, salt);
+    await user.save();
+
+    res.send('User registered');
     
   } catch(err) {
-
-  }
+      console.error(err.message);
+      res.status(500).send('Server error')
+  };
 
 
 });
