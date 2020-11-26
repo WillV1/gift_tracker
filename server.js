@@ -15,14 +15,12 @@ app.use(cors({
   credentials: true
 }));
 
-//routes
-const routes = require('./routes');
+//controller and routes
+const ctrl = require('./controllers');
 
-app.get('/', (req,res) => res.send('API running'))
-
-app.use('/recipients', routes.recipients);
-app.use('/gifts', routes.gifts);
-app.use('/users', routes.users);
-app.use('/auth', routes.auth);
+// app.use('/recipients', routes.recipients);
+// app.use('/gifts', routes.gifts);
+app.use('/users', ctrl.users);
+// app.use('/auth', routes.auth);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
