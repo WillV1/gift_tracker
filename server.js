@@ -21,8 +21,6 @@ app.use(cors({
 const ctrl = require('./controllers');
 const routes = require('./routes');
 
-// app.use('/recipients', routes.recipients);
-// app.use('/gifts', routes.gifts);
 app.use('/users', ctrl.users);
 app.use('/auth', routes.auth);
 
