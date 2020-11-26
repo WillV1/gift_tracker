@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const auth = require('./middleware/auth');
 require('dotenv').config()
 
 const PORT = process.env.PORT || 3001;
@@ -15,12 +16,14 @@ app.use(cors({
   credentials: true
 }));
 
+
 //controller and routes
 const ctrl = require('./controllers');
+const routes = require('./routes');
 
 // app.use('/recipients', routes.recipients);
 // app.use('/gifts', routes.gifts);
 app.use('/users', ctrl.users);
-// app.use('/auth', routes.auth);
+app.use('/auth', routes.auth);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
