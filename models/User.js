@@ -13,9 +13,6 @@ const userSchema = new mongoose.Schema ({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Recipient'
   }],
-  gifts: [{
-    type: String
-  }]
 });
 
 const User = mongoose.model('User', userSchema);

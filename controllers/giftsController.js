@@ -41,20 +41,15 @@ async (req, res) => {
   }
 
   try {
-    // const recipient = await Recipient.findById(req.params.id);
 
     const newGift = new Gift ({ 
       name: req.body.name,
       price: req.body.price,
       quantity: req.body.quantity,
       purchased: req.body.purchased,
-      // recipient: req.params.id
     })
 
     const gift = await newGift.save();
-
-    // recipient.gifts.push(gift);
-    // recipient.save();
     
     res.json(gift);
 

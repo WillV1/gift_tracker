@@ -40,7 +40,7 @@ router.post('/',
   check('name', 'Name is required').not().isEmpty(),
   check('budget', 'Budgeted amount is required').not().isEmpty()
 ]], 
-// upload.single('image'), 
+upload.single('image'), 
 async (req, res) => {
   const errors = validationResult(req);
   if(!errors.isEmpty()) {
@@ -49,14 +49,14 @@ async (req, res) => {
 
   try {
     const user = await User.findById(req.user.id).select('-password');
-    // const image = await cloudinary.uploader.upload(req.file.path);
+    const image = await cloudinary.uploader.upload(req.file.path);
 
     const newRecipient = new Recipient ({ 
       name: req.body.name,
       relationship: req.body.relationship,
       budget: req.body.budget,
       user: req.user.id,
-      // img: image
+      img: image
     })
 
     const recipient = await newRecipient.save();
