@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('../models')
 const router = express.Router();
 
+//show list of gifts
 router.get('/', async (req, res) => {
   try {
     const result = await db.Gift.find({})
@@ -12,6 +13,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+//show gift
 router.get('/:id', async (req, res) => {
   try {
     const result = await db.Gift.findById(req.params.id)
@@ -22,6 +24,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+//add new gift
 router.post('/', async (req, res) => {
   try {
     const result = await db.Gift.create(req.body)
@@ -39,6 +42,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+//edit gift
 router.put('/:id', async (req, res) => {
   try {
     const result = await db.Gift.findByIdAndUpdate(
@@ -53,6 +57,7 @@ router.put('/:id', async (req, res) => {
   } 
 });
 
+//delete gift
 router.delete('/:id', async (req, res) => {
   try {
     const result = await db.Gift.findByIdAndDelete(req.params.id)

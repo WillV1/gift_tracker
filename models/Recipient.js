@@ -17,7 +17,7 @@ const recipientSchema = new mongoose.Schema ({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Gift'
   }],
-  img: String
+  // img: String
 });
 
 const Recipient = mongoose.model('Recipient', recipientSchema);

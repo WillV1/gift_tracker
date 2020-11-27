@@ -31,6 +31,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+//create user
 router.post('/', [
   //express validation
   check('name', 'Name is required').not().isEmpty(),

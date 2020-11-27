@@ -1,7 +1,13 @@
 const express = require('express');
-const db = require('../models')
+const db = require('../models');
+const { User, Recipient, Gift } = require('../models');
 const router = express.Router();
+const { check, validationResult } = require('express-validator');
+const auth = require('../middleware/auth');
+const cloudinary = require('../utils/cloudinary');
+const upload = require('../utils/multer');
 
+//get list of recipients
 router.get('/', async (req, res) => {
   try {
     const result = await db.Recipient.find({})
@@ -12,6 +18,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+//show recipient
 router.get('/:id', async (req, res) => {
   try {
     const result = await db.Recipient.findById(req.params.id)
@@ -27,23 +34,47 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+//create recipient
+router.post('/', 
+[auth, [
+  check('name', 'Name is required').not().isEmpty(),
+  check('budget', 'Budgeted amount is required').not().isEmpty()
+]], 
+// upload.single('image'), 
+async (req, res) => {
+  const errors = validationResult(req);
+  if(!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+
   try {
-    const result = await db.Recipient.create(req.body)
-    db.User.findById(req.body.user, (err, foundUser) => {
-      if(err) return console.log(err);
-      foundUser.recipients.push(result._id)
-      foundUser.save((err, savedUser) => {
-        if (err) return console.log(err)
-      })
+    const user = await User.findById(req.user.id).select('-password');
+    const gift = await Gift.findById(req.params.id);
+    // const image = await cloudinary.uploader.upload(req.file.path);
+
+    const newRecipient = new Recipient ({ 
+      name: req.body.name,
+      relationship: req.body.relationship,
+      budget: req.body.budget,
+      user: req.user.id,
+      gifts: gift,
+      // img: image
     })
-    res.json({result})
+
+    const recipient = await newRecipient.save();
+
+    user.recipients.push(recipient);
+    user.save();
+    
+    res.json(recipient);
+
   } catch(err) {
-    console.log('Error on create route', err);
-    res.json({Error: 'Unable to save data'})
+    console.error(err.message);
+    res.status(500).send('Server error')
   }
 });
 
+//edit recipient
 router.put('/:id', async (req, res) => {
   try {
     const result = await db.Recipient.findByIdAndUpdate(
@@ -58,6 +89,7 @@ router.put('/:id', async (req, res) => {
   } 
 });
 
+//delete recipient
 router.delete('/:id', async (req, res) => {
   try {
     const result = await db.Recipient.findByIdAndDelete(req.params.id)
