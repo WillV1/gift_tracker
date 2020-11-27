@@ -12,6 +12,9 @@ const userSchema = new mongoose.Schema ({
   recipients: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Recipient'
+  }],
+  gifts: [{
+    type: String
   }]
 });
 

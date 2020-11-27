@@ -13,10 +13,6 @@ const giftSchema = new mongoose.Schema ({
     required: true
   },
   purchased: Boolean,
-  // recipient: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'Recipient'
-  // }
 });
 
 const Gift = mongoose.model('Gift', giftSchema);

@@ -14,8 +14,7 @@ const recipientSchema = new mongoose.Schema ({
     ref: 'User'
   },
   gifts: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Gift'
+    type: String
   }],
   // img: String
 });
