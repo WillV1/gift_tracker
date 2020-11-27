@@ -4,6 +4,7 @@ import {
   Route
 } from "react-router-dom";
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 
@@ -20,9 +21,10 @@ import 'materialize-css/dist/css/materialize.min.css';
 function App() {
   return (
     <div>
-    <NavBar />
     <Router>
+    <NavBar />
       <Switch>
+        <Route exact path='/' component={Home} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={LogIn} />
         <Route path="/about" component={About} />
@@ -30,9 +32,9 @@ function App() {
         <Route path="/budget" component={Budget} />
         <Route path="/new" component={AddRecipient} />
         <Route path="/recipient/:id" component={Recipient} />
-        <Route path='/' comoponent={Home} />
         <Route component={NotFoundPage} />
       </Switch>
+    <Footer />
     </Router>
     </div>
   );

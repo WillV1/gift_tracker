@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import M from "materialize-css";
 
 const NavBar = () => {
@@ -11,7 +11,6 @@ const NavBar = () => {
 
   return (
     <div>
-      <Router>
       <nav>
       <div className="nav-wrapper">
         <a href="/" className="brand-logo">Gift Tracker</a>
@@ -27,7 +26,7 @@ const NavBar = () => {
       </div>
       </nav>
 
-      <ul id="slide-out" class="sidenav">
+      <ul id="slide-out" className="sidenav">
         <li><Link to="/new">Add Recipient</Link></li>
         <li><Link to="/budget">Check Budget</Link></li>
         <li><Link to="/main">Home</Link></li>
@@ -36,8 +35,8 @@ const NavBar = () => {
         <li><Link to="/signup">Sign Up</Link></li>
         <li><Link to="/login">Log In</Link></li>
       </ul>
-      <a href="/" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      </Router>
+      <a href="/" data-target="slide-out" className="sidenav-trigger">
+      <i className="material-icons">menu</i></a>
     </div>
   )
 };
