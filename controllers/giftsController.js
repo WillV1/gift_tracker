@@ -1,6 +1,9 @@
 const express = require('express');
-const db = require('../models')
+const db = require('../models');
+const { Recipient, Gift } = require('../models');
 const router = express.Router();
+const { check, validationResult } = require('express-validator');
+const auth = require('../middleware/auth');
 
 //show list of gifts
 router.get('/', async (req, res) => {
@@ -25,20 +28,39 @@ router.get('/:id', async (req, res) => {
 });
 
 //add new gift
-router.post('/', async (req, res) => {
+router.post('/', 
+[auth, [
+  check('name', 'Name is required').not().isEmpty(),
+  check('price', 'Price is required').not().isEmpty(),
+  check('quantity', 'Quantity is required').not().isEmpty()
+]], 
+async (req, res) => {
+  const errors = validationResult(req);
+  if(!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+
   try {
-    const result = await db.Gift.create(req.body)
-    db.Recipient.findById(req.body.recipient, (err, foundRecipient) => {
-      if(err) return console.log(err);
-      foundRecipient.gifts.push(result._id)
-      foundRecipient.save((err, savedRecipient) => {
-        if (err) return console.log(err)
-      })
+    // const recipient = await Recipient.findById(req.params.id);
+
+    const newGift = new Gift ({ 
+      name: req.body.name,
+      price: req.body.price,
+      quantity: req.body.quantity,
+      purchased: req.body.purchased,
+      // recipient: req.params.id
     })
-    res.json({result})
+
+    const gift = await newGift.save();
+
+    // recipient.gifts.push(gift);
+    // recipient.save();
+    
+    res.json(gift);
+
   } catch(err) {
-    console.log('Error on create route', err);
-    res.json({Error: 'Unable to save data'})
+    console.error(err.message);
+    res.status(500).send('Server error')
   }
 });
 

@@ -49,7 +49,7 @@ async (req, res) => {
 
   try {
     const user = await User.findById(req.user.id).select('-password');
-    const gift = await Gift.findById(req.params.id);
+    // const gift = await Gift.findById(req.params.id);
     // const image = await cloudinary.uploader.upload(req.file.path);
 
     const newRecipient = new Recipient ({ 
@@ -57,7 +57,7 @@ async (req, res) => {
       relationship: req.body.relationship,
       budget: req.body.budget,
       user: req.user.id,
-      gifts: gift,
+      // gifts: gift,
       // img: image
     })
 
@@ -65,7 +65,7 @@ async (req, res) => {
 
     user.recipients.push(recipient);
     user.save();
-    
+
     res.json(recipient);
 
   } catch(err) {

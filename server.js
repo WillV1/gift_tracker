@@ -23,6 +23,7 @@ const routes = require('./routes');
 
 app.use('/users', ctrl.users);
 app.use('/recipients', ctrl.recipients);
+app.use('/gifts', ctrl.gifts);
 app.use('/auth', routes.auth);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

@@ -12,11 +12,11 @@ const giftSchema = new mongoose.Schema ({
     type: Number,
     required: true
   },
-  quantity_purchased: Number,
-  recipient: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Recipient'
-  }
+  purchased: Boolean,
+  // recipient: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Recipient'
+  // }
 });
 
 const Gift = mongoose.model('Gift', giftSchema);
