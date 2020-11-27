@@ -21,6 +21,12 @@ const AddRecipent = () => {
       e.preventDefault();
       
       console.log(state);
+
+      setState({
+        name: '',
+        relationship: '',
+        budget: ''
+      });
       
     };
 
@@ -51,6 +57,17 @@ const AddRecipent = () => {
           onChange={e => onChange(e)}
           className="validate" required/>
           <label htmlFor="budget">Budget</label>
+        </div>
+      </div>
+      <div className="row">
+        <div className="file-field input-field  col s6 offset-s10">
+          <div class="btn">
+            <span>File</span>
+            <input type="file" />
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text" />
+          </div>
         </div>
       </div>
       <div className="col s6 offset-s10">
