@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../actions/alert';
 import { register } from '../actions/auth';
 import PropTypes from 'prop-types';
 
-const SignUp = ({setAlert, register }) => {
+const SignUp = ({setAlert, register, isAuthenticated }) => {
   const [state, setState] = useState({
     name: '',
     email: '',
@@ -36,6 +37,11 @@ const SignUp = ({setAlert, register }) => {
       password2: ''
     });
   };
+
+  //redirect if registered
+  if(isAuthenticated) {
+    return <Redirect to='/main' />
+  }
 
   return (
     <div>
@@ -86,7 +92,12 @@ const SignUp = ({setAlert, register }) => {
 
 SignUp.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired
-}
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
+};
 
-export default connect(null, { setAlert, register })(SignUp);
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { setAlert, register })(SignUp);
