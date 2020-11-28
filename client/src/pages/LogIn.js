@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { login } from '../actions/auth';
 
@@ -62,7 +62,9 @@ const LogIn = ({login, isAuthenticated}) => {
         </button>
       </div>
     </form>
-  </div>
+    </div>
+
+    <p className="center-align">Don't have an account? <Link to="/signup">Sign Up</Link></p>
     </div>
   )
 }

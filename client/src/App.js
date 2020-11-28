@@ -14,6 +14,8 @@ import Recipient from './pages/Recipient';
 import AddRecipient from './pages/AddRecipient';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
+import Main from './pages/Main';
+import PrivateRoute from './routing/PrivateRoute';
 import NotFoundPage from './pages/NotFound';
 import Alert from './components/Alert';
 //redux
@@ -47,7 +49,7 @@ function App() {
       <Route path="/signup" component={SignUp} />
       <Route path="/login" component={LogIn} />
       <Route path="/about" component={About} />
-      {/*<Route path="/main" component={Main} />*/}
+      <PrivateRoute path="/main" component={Main} />
       <Route path="/budget" component={Budget} />
       <Route path="/new" component={AddRecipient} />
       <Route path="/recipient/:id" component={Recipient} />
