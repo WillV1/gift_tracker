@@ -86,17 +86,24 @@ async (req, res) => {
 });
 
 //edit recipient (add / edit gifts)
-router.put('/gift/:id', auth, async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
   try {
+
+    const name = req.body.name;
+    const price = req.body.price;
+    const quantity = req.body.quantity;
+    const purchased = req.body.purchased;
+
     const recipient = await db.Recipient.findByIdAndUpdate(
       req.params.id,
-      {$push: {"gifts": {name: req.body.name, 
-      price: req.body.price,
-      quantity: req.body.quantity,
-      purchased: req.body.purchased}}},
-      {new: true},
+      {$push: {"gifts": {name: name, 
+      price: price,
+      quantity: quantity,
+      purchased: purchased}}},
+      {safe: true, upsert: true, new: true},
       );
     res.json(recipient)
+
   } catch(err) {
     console.log(err.message);
     res.status(500).send('Server error');
