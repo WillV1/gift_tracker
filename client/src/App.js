@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,11 +19,22 @@ import Alert from './components/Alert';
 //redux
 import { Provider } from 'react-redux';
 import store from './store';
+import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
 
 import './App.css';
 import 'materialize-css/dist/css/materialize.min.css';
 
+if(localStorage.token) {
+  setAuthToken(localStorage.token)
+}
+
 function App() {
+
+  useEffect (() => {
+    store.dispatch(loadUser());
+  }, []);
+
   return (
     <Provider store={store}>
     <div>
