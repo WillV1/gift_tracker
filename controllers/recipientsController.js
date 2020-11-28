@@ -19,29 +19,32 @@ const storage = multer.diskStorage({
   const upload = multer({storage: storage}).single('img');
 
 //get list of recipients
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
   try {
     const result = await db.Recipient.find({})
     res.json({result})
   } catch(err) {
-      console.log('Error on index.route', err);
-      res.json({Error: 'Unable to retrieve user'})
+      console.log(err.message);
+      res.status(500).send('Server error');
   }
 });
 
 //show recipient
-router.get('/:id', async (req, res) => {
+router.get('/:id', auth, async (req, res) => {
   try {
     const result = await db.Recipient.findById(req.params.id)
-    .populate('gifts')
-    .exec((err, gifts) => {
-      if(err) console.log(err)
-      console.log(gifts)
-    })
-    res.json({result, data: gifts})
+
+    if(!result) {
+      return res.status(404).json({msg: 'Recipient not found'})
+    };
+    res.json({result})
   } catch(err) {
-      console.log('Error on show.route', err);
-      res.json({Error: 'Unable to retrieve user'})
+    console.log(err.message);
+
+    if(err.kind === 'ObjectId') {
+      return res.status(404).json({msg: 'Recipient not found'})
+    };
+    res.status(500).send('Server error');
   }
 });
 
@@ -92,22 +95,35 @@ router.put('/:id', async (req, res) => {
     ) 
     res.json(result)
   } catch(err) {
-      console.log('Error on update route', err);
-      res.json({Error: 'Unable to update data'})
+    console.log(err.message);
+    res.status(500).send('Server error');
   } 
 });
 
 //delete recipient
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
   try {
-    const result = await db.Recipient.findByIdAndDelete(req.params.id)
-    db.Gift.deleteMany({_id: {$in: result.gifts}}, (err) => {
-      if(err) return console.log(err);      
-    })
-    res.json(result)
+    const result = await db.Recipient.findById(req.params.id);
+
+    if(!post) {
+      return res.status(404).json({msg: 'Recipient not found'})
+    }
+
+    if(result.user.toString() !== req.user.id) {
+      return res.status(401).json({msg: 'User not authorized'})
+    }
+
+    await result.remove();
+
+    res.json({msg: 'Recipient removed'})
   } catch(err) {
-      console.log('Error on delete route', err);
-      res.json({Error: 'Unable to delete data'})
+    console.log(err.message);
+
+    if(err.kind === 'ObjectId') {
+      return res.status(404).json({msg: 'Recipient not found'})
+    };
+
+    res.status(500).send('Server error');
   }
 });
 
