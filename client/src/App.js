@@ -14,12 +14,16 @@ import AddRecipient from './pages/AddRecipient';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
 import NotFoundPage from './pages/NotFound';
+//redux
+import { Provider } from 'react-redux';
+import store from './store';
 
 import './App.css';
 import 'materialize-css/dist/css/materialize.min.css';
 
 function App() {
   return (
+    <Provider store={store}>
     <div>
     <Router>
     <NavBar />
@@ -37,6 +41,7 @@ function App() {
     <Footer />
     </Router>
     </div>
+    </Provider>
   );
 }
 
