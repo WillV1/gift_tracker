@@ -1,11 +1,22 @@
 const express = require('express');
+const multer = require('multer');
 const db = require('../models');
-const { User, Recipient, Gift } = require('../models');
+const { User, Recipient } = require('../models');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../middleware/auth');
-const cloudinary = require('../utils/cloudinary');
-const upload = require('../utils/multer');
+
+//multer middleware
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './public/uploads');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + '_' + Date.now() + '_' + file.originalname);
+  },
+  });
+
+  const upload = multer({storage: storage}).single('img');
 
 //get list of recipients
 router.get('/', async (req, res) => {
@@ -40,7 +51,6 @@ router.post('/',
   check('name', 'Name is required').not().isEmpty(),
   check('budget', 'Budgeted amount is required').not().isEmpty()
 ]], 
-upload.single('image'), 
 async (req, res) => {
   const errors = validationResult(req);
   if(!errors.isEmpty()) {
@@ -48,15 +58,14 @@ async (req, res) => {
   }
 
   try {
+    await upload(req, res);
     const user = await User.findById(req.user.id).select('-password');
-    const image = await cloudinary.uploader.upload(req.file.path);
 
     const newRecipient = new Recipient ({ 
       name: req.body.name,
       relationship: req.body.relationship,
       budget: req.body.budget,
       user: req.user.id,
-      img: image
     })
 
     const recipient = await newRecipient.save();

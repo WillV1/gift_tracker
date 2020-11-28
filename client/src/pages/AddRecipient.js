@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 
 const AddRecipent = () => {
 
@@ -6,26 +7,41 @@ const AddRecipent = () => {
       name: '',
       relationship: '',
       budget: '',
+      image: null
     })
 
-    const { name, relationship, budget } = state;
+    const { name, relationship, budget, image } = state;
 
     const onChange = (e) => {
       setState({
         ...state,
-        [e.target.name]: e.target.value
+        [e.target.name]: e.target.value,
+        image: e.target.files[0]
       });
-    }
+    };
 
     const onSubmit = async e => {
       e.preventDefault();
-      
-      console.log(state);
+
+      const formData = new FormData();
+      formData.append('myfile', image);
+      const config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      try {
+        const response = await axios.post('http://localhost:3001/recipients', formData, config)
+        return response.data
+      } catch(err) {
+        console.log(err)
+      }
 
       setState({
         name: '',
         relationship: '',
-        budget: ''
+        budget: '',
+        file: null
       });
       
     };
@@ -66,7 +82,7 @@ const AddRecipent = () => {
             <input type="file" />
           </div>
           <div class="file-path-wrapper">
-            <input class="file-path validate" type="text" />
+            <input class="file-path validate" type="text" onChange={e => onChange(e)}/>
           </div>
         </div>
       </div>
