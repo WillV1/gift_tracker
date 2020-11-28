@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { setAlert } from '../actions/alert';
+import { register } from '../actions/auth';
 import PropTypes from 'prop-types';
 
-const SignUp = ({setAlert}) => {
+const SignUp = ({setAlert, register }) => {
   const [state, setState] = useState({
     name: '',
     email: '',
@@ -25,7 +26,7 @@ const SignUp = ({setAlert}) => {
     if(password !== password2 ) {
       setAlert('Passwords do not match', 'danger')
     } else {
-      console.log('SUCCESS');
+      register({ name, email, password });
     }
 
     setState({
@@ -45,7 +46,7 @@ const SignUp = ({setAlert}) => {
       <div className="input-field col s6 offset-s10">
         <input name="name" id="name" type="text" value={name} 
         onChange={e => onChange(e)} 
-        className="validate" required/>
+        className="validate"/>
         <label htmlFor="name">Name</label>
       </div>
       </div>
@@ -53,7 +54,7 @@ const SignUp = ({setAlert}) => {
         <div className="input-field col s6 offset-s10">
           <input name="email" id="email" type="email" value={email} 
           onChange={e => onChange(e)} 
-          className="validate" required/>
+          className="validate"/>
           <label htmlFor="email">Email</label>
         </div>
       </div>
@@ -61,7 +62,7 @@ const SignUp = ({setAlert}) => {
         <div className="input-field col s6 offset-s10">
           <input name="password" id="password" type="password" value={password} 
           onChange={e => onChange(e)} 
-          className="validate" required/>
+          className="validate"/>
           <label htmlFor="password">Password</label>
         </div>
       </div>
@@ -69,7 +70,7 @@ const SignUp = ({setAlert}) => {
         <div className="input-field col s6 offset-s10">
           <input name="password2" id="password" type="password" value={password2} 
           onChange={e => onChange(e)} 
-          className="validate" required/>
+          className="validate"/>
           <label htmlFor="password">Confirm Password</label>
         </div>
       </div>
@@ -84,7 +85,8 @@ const SignUp = ({setAlert}) => {
 }
 
 SignUp.propTypes = {
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired
 }
 
-export default connect(null, { setAlert })(SignUp);
+export default connect(null, { setAlert, register })(SignUp);
