@@ -14,5 +14,4 @@ mongoose.connection.on('error', (err) => console.log(err));
 module.exports = {
   User: require('./User'),
   Recipient: require('./Recipient'),
-  Gift: require('./Gift')
 };

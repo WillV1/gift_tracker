@@ -14,7 +14,10 @@ const recipientSchema = new mongoose.Schema ({
     ref: 'User'
   },
   gifts: [{
-    type: String
+    name: {type: String},
+    price: {type: Number},
+    quantity: {type: Number},
+    purchased: {type: Boolean}
   }],
   img: String
 });

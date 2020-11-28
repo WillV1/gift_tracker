@@ -58,7 +58,7 @@ async (req, res) => {
   }
 
   try {
-    await upload(req, res);
+    // await upload(req, res);
     const user = await User.findById(req.user.id).select('-password');
 
     const newRecipient = new Recipient ({ 
@@ -66,6 +66,7 @@ async (req, res) => {
       relationship: req.body.relationship,
       budget: req.body.budget,
       user: req.user.id,
+      // img: req.file.filename
     })
 
     const recipient = await newRecipient.save();
