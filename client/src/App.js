@@ -14,6 +14,7 @@ import AddRecipient from './pages/AddRecipient';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
 import NotFoundPage from './pages/NotFound';
+import Alert from './components/Alert';
 //redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -27,17 +28,20 @@ function App() {
     <div>
     <Router>
     <NavBar />
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/login" component={LogIn} />
-        <Route path="/about" component={About} />
-        {/*<Route path="/main" component={Main} />*/}
-        <Route path="/budget" component={Budget} />
-        <Route path="/new" component={AddRecipient} />
-        <Route path="/recipient/:id" component={Recipient} />
-        <Route component={NotFoundPage} />
-      </Switch>
+    <div className="container">
+    <Alert />
+    <Switch>
+      <Route exact path='/' component={Home} />
+      <Route path="/signup" component={SignUp} />
+      <Route path="/login" component={LogIn} />
+      <Route path="/about" component={About} />
+      {/*<Route path="/main" component={Main} />*/}
+      <Route path="/budget" component={Budget} />
+      <Route path="/new" component={AddRecipient} />
+      <Route path="/recipient/:id" component={Recipient} />
+      <Route component={NotFoundPage} />
+    </Switch>
+    </div>
     <Footer />
     </Router>
     </div>

@@ -1,3 +1,9 @@
+:root {
+  --light-color: #fff;
+  --danger-color: #d35d6e;
+}
+
+
 body {
   display: flex;
   min-height: 100vh;
@@ -6,4 +12,17 @@ body {
 
 main {
   flex: 1 0 auto;
+}
+
+.alert {
+  padding: 0.8rem;
+  margin: 1rem 0;
+  opacity: 0.9;
+  background: var(--light-color);
+  color: #333;
+}
+
+.alert-danger {
+  background: var(--danger-color);
+  color: #fff
 }

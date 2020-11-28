@@ -18,6 +18,12 @@ const LogIn = () => {
   const onSubmit = e => {
     e.preventDefault();
     console.log('SUCCESS');
+
+    setState({
+      email: '',
+      password: '',
+    });
+    
   };
 
   return (
