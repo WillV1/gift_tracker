@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addRecipient } from '../actions/recipient';
 
-const AddRecipent = () => {
+const AddRecipent = ({addRecipient}) => {
 
     const [state, setState] = useState({
       name: '',
@@ -23,19 +25,7 @@ const AddRecipent = () => {
     const onSubmit = async e => {
       e.preventDefault();
 
-      const formData = new FormData();
-      formData.append('myfile', image);
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      };
-      try {
-        const response = await axios.post('http://localhost:3001/recipients', formData, config)
-        return response.data
-      } catch(err) {
-        console.log(err)
-      }
+      addRecipient({name, relationship, budget, image});
 
       setState({
         name: '',
@@ -79,7 +69,7 @@ const AddRecipent = () => {
         <div className="file-field input-field  col s6 offset-s10">
           <div class="btn">
             <span>File</span>
-            <input type="file" />
+            <input type="file" value={image}/>
           </div>
           <div class="file-path-wrapper">
             <input class="file-path validate" type="text" onChange={e => onChange(e)}/>
@@ -96,4 +86,8 @@ const AddRecipent = () => {
   )
 }
 
-export default AddRecipent;
+addRecipient.propTypes = {
+addRecipient: PropTypes.func.isRequired
+}
+
+export default connect(null, {addRecipient})(AddRecipent);

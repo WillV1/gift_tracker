@@ -1,22 +1,12 @@
 const express = require('express');
-const multer = require('multer');
+const cloudinary = require("../utils/cloudinary");
+const upload = require("../utils/multer");
 const db = require('../models');
 const { User, Recipient } = require('../models');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../middleware/auth');
 
-//multer middleware
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, './public/uploads');
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.fieldname + '_' + Date.now() + '_' + file.originalname);
-  },
-  });
-
-  const upload = multer({storage: storage}).single('img');
 
 //get list of recipients
 router.get('/', auth, async (req, res) => {
@@ -38,6 +28,7 @@ router.get('/:id', auth, async (req, res) => {
       return res.status(404).json({msg: 'Recipient not found'})
     };
     res.json({result})
+    
   } catch(err) {
     console.log(err.message);
 
@@ -50,26 +41,29 @@ router.get('/:id', auth, async (req, res) => {
 
 //create recipient
 router.post('/', 
-[auth, [
-  check('name', 'Name is required').not().isEmpty(),
-  check('budget', 'Budgeted amount is required').not().isEmpty()
-]], 
+[auth, 
+//   [
+//   check('name', 'Name is required').not().isEmpty(),
+//   check('budget', 'Budgeted amount is required').not().isEmpty()
+// ]
+], 
+upload.single('image'),
 async (req, res) => {
-  const errors = validationResult(req);
-  if(!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() })
-  }
+  // const errors = validationResult(req);
+  // if(!errors.isEmpty()) {
+  //   return res.status(400).json({ errors: errors.array() })
+  // }
 
   try {
-    // await upload(req, res);
     const user = await User.findById(req.user.id).select('-password');
+    const result = await cloudinary.uploader.upload(req.file.path);
 
     const newRecipient = new Recipient ({ 
       name: req.body.name,
       relationship: req.body.relationship,
       budget: req.body.budget,
       user: req.user.id,
-      // img: req.file.filename
+      img: result.public_id
     })
 
     const recipient = await newRecipient.save();

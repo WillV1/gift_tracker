@@ -43,19 +43,20 @@ export const deleteRecipient = id => async dispatch => {
 export const addRecipient = formData => async dispatch => {
 
   const config = {
-    headers: {
-      'Content-Type': 'application/json'
+    headers: { 
+      Accept: 'application/json',
+      'Content-Type': 'multipart/form-data'
     }
   }
   try {
-    const response = await axios.delete(`http://localhost:3001/recipients/${id}`);
+    const response = await axios.delete(`http://localhost:3001/recipients/`, formData, config);
 
     dispatch({
-      type: DELETE_RECIPIENT,
-      payload: id
+      type: ADD_RECIPIENT,
+      payload: response.data
     })
 
-    dispatch(setAlert('Recipient Removed', 'success'));
+    dispatch(setAlert('Recipient Added', 'success'));
 
   } catch (err) {
     dispatch({
