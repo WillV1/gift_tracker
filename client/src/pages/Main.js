@@ -12,11 +12,26 @@ const Main = ({ getRecipients, recipient: { recipients, loading} }) => {
     getRecipients();
   }, [getRecipients])
   return loading ? <Spinner /> : <Fragment>
-  <h2>Recipient</h2>
-  <p>Recipient Name</p>
-  {recipients.map(recipient => (
-    <RecipientItem key={recipient._id} recipient={recipient}/>
-  ))}
+  <div className="container">
+    <div className="row">
+      <div className="col s3">
+        <h2>Recipient</h2>
+        {recipients.map(recipient => (
+        <RecipientItem key={recipient._id} recipient={recipient}/>
+        ))}
+      </div>
+      <div className="col s2">
+      </div>
+      <div className="col s3">
+        <h2>Status</h2>
+      </div>
+      <div className="col s2">
+      </div>
+      <div className="col s2">
+      </div>
+    </div>
+  </div>
+  
   </Fragment>
 };
 
