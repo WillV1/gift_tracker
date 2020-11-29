@@ -21,8 +21,8 @@ const storage = multer.diskStorage({
 //get list of recipients
 router.get('/', auth, async (req, res) => {
   try {
-    const result = await db.Recipient.find({})
-    res.json({result})
+    const recipients = await db.Recipient.find({})
+    res.json(recipients)
   } catch(err) {
       console.log(err.message);
       res.status(500).send('Server error');
