@@ -1,6 +1,7 @@
 :root {
   --light-color: #fff;
   --danger-color: #d35d6e;
+  --success-color: #5aa469;
 }
 
 
@@ -24,5 +25,10 @@ main {
 
 .alert-danger {
   background: var(--danger-color);
+  color: #fff
+}
+
+.alert-success {
+  background: var(--success-color);
   color: #fff
 }

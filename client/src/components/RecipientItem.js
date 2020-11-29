@@ -1,9 +1,9 @@
-import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { deleteRecipient } from '../actions/recipient';
 
-const RecipientItem = ({ auth, recipient: { _id, name }}) => {
+const RecipientItem = ({ deleteRecipient, auth, recipient: { _id, name }}) => {
   return (
     <div className="container">
       <div className="row">
@@ -15,7 +15,8 @@ const RecipientItem = ({ auth, recipient: { _id, name }}) => {
         <div className="col s4">
           <Link to={`/recipient/${_id}`} className="waves-effect waves-light btn-small">
           View Recipient</Link>
-          <a className="waves-effect waves-light btn-small">Delete Recipient</a>
+          <button onClick={e => deleteRecipient(_id)} className="waves-effect waves-light btn-small">
+          Delete Recipient</button>
         </div>
       </div>
     </div>
@@ -24,11 +25,12 @@ const RecipientItem = ({ auth, recipient: { _id, name }}) => {
 
 RecipientItem.propTypes = {
   recipient: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  deleteRecipient: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {})(RecipientItem);
+export default connect(mapStateToProps, {deleteRecipient})(RecipientItem);

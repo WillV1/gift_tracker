@@ -9,3 +9,4 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const GET_RECIPIENTS = 'GET_RECIPIENTS';
 export const RECIPIENT_ERROR = 'RECIPIENT_ERROR';
+export const DELETE_RECIPIENT = 'DELETE_RECIPIENT';

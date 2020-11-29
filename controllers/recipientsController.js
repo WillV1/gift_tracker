@@ -115,10 +115,6 @@ router.delete('/:id', auth, async (req, res) => {
   try {
     const result = await db.Recipient.findById(req.params.id);
 
-    if(!post) {
-      return res.status(404).json({msg: 'Recipient not found'})
-    }
-
     if(result.user.toString() !== req.user.id) {
       return res.status(401).json({msg: 'User not authorized'})
     }
