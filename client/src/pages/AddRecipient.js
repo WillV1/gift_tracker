@@ -27,7 +27,7 @@ const AddRecipent = () => {
       formData.append('myfile', image);
       const config = {
         headers: {
-          'content-type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data'
         }
       };
       try {
