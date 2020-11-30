@@ -19,7 +19,7 @@ const recipientSchema = new mongoose.Schema ({
     quantity: {type: Number},
     purchased: {type: Boolean}
   }],
-  img: String
+  image: String
 });
 
 const Recipient = mongoose.model('Recipient', recipientSchema);

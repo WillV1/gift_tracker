@@ -17,8 +17,7 @@ const AddRecipent = ({addRecipient}) => {
     const onChange = (e) => {
       setState({
         ...state,
-        [e.target.name]: e.target.value,
-        image: e.target.files[0]
+        [e.target.name]: e.target.value
       });
     };
 
@@ -31,7 +30,7 @@ const AddRecipent = ({addRecipient}) => {
         name: '',
         relationship: '',
         budget: '',
-        file: null
+        image: null
       });
       
     };
@@ -40,7 +39,7 @@ const AddRecipent = ({addRecipient}) => {
     <div>
       <h3 className="center-align">Add Recipient</h3>
       <div className="row">
-    <form className="col s6" onSubmit={e => onSubmit(e)}>
+    <form className="col s6" onSubmit={e => onSubmit(e)} method="post" enctype="multipart/form-data">
       <div className="row">
       <div className="input-field col s6 offset-s10">
         <input name="name" id="name" type="text" value={name}
@@ -67,12 +66,13 @@ const AddRecipent = ({addRecipient}) => {
       </div>
       <div className="row">
         <div className="file-field input-field  col s6 offset-s10">
-          <div class="btn">
+          <div className="btn">
             <span>File</span>
-            <input type="file" value={image}/>
+            <input type="file" name="image" onChange={e => onChange(e)} value={image}/>
           </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text" onChange={e => onChange(e)}/>
+          <div className="file-path-wrapper">
+            <input className="file-path validate" name="image" onChange={e => onChange(e)} 
+            value={image} type="text" />
           </div>
         </div>
       </div>

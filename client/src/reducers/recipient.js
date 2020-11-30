@@ -2,7 +2,8 @@ import {
   GET_RECIPIENTS,
   RECIPIENT_ERROR,
   DELETE_RECIPIENT,
-  ADD_RECIPIENT
+  ADD_RECIPIENT,
+  GET_RECIPIENT
 } from '../actions/types';
 
 
@@ -24,6 +25,12 @@ export default function recipients(state = initialState, action) {
         recipients: payload,
         loading: false
       };
+    case GET_RECIPIENT:
+      return {
+        ...state,
+        recipient: payload,
+        loading: false
+      }
     case ADD_RECIPIENT:
       return {
         ...state,

@@ -52,7 +52,7 @@ function App() {
       <PrivateRoute path="/main" component={Main} />
       <Route path="/budget" component={Budget} />
       <Route path="/new" component={AddRecipient} />
-      <Route path="/recipient/:id" component={Recipient} />
+      <PrivateRoute path="/recipient/:id" component={Recipient} />
       <Route component={NotFoundPage} />
     </Switch>
     </div>

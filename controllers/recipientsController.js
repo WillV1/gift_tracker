@@ -7,6 +7,9 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../middleware/auth');
 
+// const upload = require('../services/upload');
+// const { uploadImage, getImage } = require('./imageController');
+
 
 //get list of recipients
 router.get('/', auth, async (req, res) => {
@@ -22,7 +25,7 @@ router.get('/', auth, async (req, res) => {
 //show recipient
 router.get('/:id', auth, async (req, res) => {
   try {
-    const result = await db.Recipient.findById(req.params.id)
+    const result = await db.Recipient.findById(req.params.id, "-__v")
 
     if(!result) {
       return res.status(404).json({msg: 'Recipient not found'})
@@ -55,6 +58,7 @@ async (req, res) => {
   // }
 
   try {
+
     const user = await User.findById(req.user.id).select('-password');
     const result = await cloudinary.uploader.upload(req.file.path);
 
@@ -63,9 +67,9 @@ async (req, res) => {
       relationship: req.body.relationship,
       budget: req.body.budget,
       user: req.user.id,
-      img: result.public_id
+      image: result.public_id
     })
-
+  
     const recipient = await newRecipient.save();
 
     user.recipients.push(recipient);
