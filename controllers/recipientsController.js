@@ -83,7 +83,38 @@ async (req, res) => {
   }
 });
 
-//edit recipient (add / edit gifts)
+//add gift
+router.post('/gift/:id', [auth, [
+      check('name', 'Name is required').not().isEmpty(),
+      check('price', 'Price is required').not().isEmpty()
+]], async(req,res) => {
+  const errors = validationResult(req);
+  if(!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+  try {
+    const recipient = await Recipient.findById(req.params.id);
+
+    const newGift = {
+      name: req.body.name,
+      price: req.body.price,
+      quantity: req.body.quantity,
+      purchased: req.body.purchased
+    }
+
+    recipient.gifts.unshift(newGift);
+
+    await recipient.save();
+
+    res.json(recipient.gifts);
+
+  } catch {
+    console.log(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+//edit recipient
 router.put('/:id', auth, async (req, res) => {
   try {
 
@@ -132,17 +163,31 @@ router.delete('/:id', auth, async (req, res) => {
 });
 
 //delete gift
-router.delete('/gift/:id', auth, async (req, res) => {
+router.delete('/gift/:id/:gift_id', auth, async (req, res) => {
   try {
-    const result = await db.Recipient.findById(req.params.id);
+    const recipient = await db.Recipient.findById(req.params.id);
 
-    if(result.user.toString() !== req.user.id) {
-      return res.status(401).json({msg: 'User not authorized'})
+    const gift = recipient.gifts.find(gift => {
+      gift.id === req.params.gift_id});
+
+    if(!gift) {
+      return res.status(404).json({msg: 'Gift does not exist'})
+    }
+    
+    if(gift.user.toString() !== req.user.id) {
+      return res.status(401).json({msg: 'User not authorized '})
     }
 
-    await result.remove();
+    const removedGift = recipient.gifts
+      .map(gift => gift.user.toString())
+      .indexOf(req.user.id)
 
-    res.json({msg: 'Recipient removed'})
+    recipient.gifts.splice(removedGift, 1)
+
+    await recipient.save();
+
+    res.json(recipient.gifts)
+    
   } catch(err) {
     console.log(err.message);
 

@@ -3,7 +3,9 @@ import {
   RECIPIENT_ERROR,
   DELETE_RECIPIENT,
   ADD_RECIPIENT,
-  GET_RECIPIENT
+  GET_RECIPIENT,
+  ADD_GIFT,
+  REMOVE_GIFT
 } from '../actions/types';
 
 
@@ -48,7 +50,22 @@ export default function recipients(state = initialState, action) {
         ...state,
         error: payload,
         loading: false
-      };
+      }
+    case ADD_GIFT:
+      return {
+        ...state,
+        recipient: {...state.recipient, gifts: payload},
+        loading: false
+      }
+    case REMOVE_GIFT:
+      return {
+        ...state,
+        recipient: {
+          ...state.recipient,
+          gifts: state.recipient.gifts.filter(gift => gift._id !== payload),
+          loading: false 
+        }
+      }
     default: 
       return state;
   }
