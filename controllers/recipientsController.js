@@ -131,4 +131,27 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
+//delete gift
+router.delete('/gift/:id', auth, async (req, res) => {
+  try {
+    const result = await db.Recipient.findById(req.params.id);
+
+    if(result.user.toString() !== req.user.id) {
+      return res.status(401).json({msg: 'User not authorized'})
+    }
+
+    await result.remove();
+
+    res.json({msg: 'Recipient removed'})
+  } catch(err) {
+    console.log(err.message);
+
+    if(err.kind === 'ObjectId') {
+      return res.status(404).json({msg: 'Recipient not found'})
+    };
+
+    res.status(500).send('Server error');
+  }
+});
+
 module.exports = router;

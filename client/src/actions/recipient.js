@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 import { GET_RECIPIENTS, RECIPIENT_ERROR, DELETE_RECIPIENT, 
-  ADD_RECIPIENT, GET_RECIPIENT } from './types';
+  ADD_RECIPIENT, GET_RECIPIENT, ADD_GIFT, EDIT_GIFT, REMOVE_GIFT } from './types';
 
 //get recipients
 export const getRecipients = () => async dispatch => {
@@ -85,3 +85,53 @@ export const getRecipient = id => async dispatch => {
     });
   }
 }
+
+//add gift
+export const addGift = (recipientId, formData) => async dispatch => {
+
+  const config = {
+    headers: { 
+      'Content-Type': 'application/json'
+    }
+  }
+  
+  try {
+    const response = await axios.put(`http://localhost:3001/recipients/${recipientId}`, formData, 
+    config);
+
+    dispatch({
+      type: ADD_GIFT,
+      payload: response.data
+    })
+    console.log(response.data);
+    dispatch(setAlert('Gift Added', 'success'));
+
+  } catch (err) {
+    dispatch({
+      type: RECIPIENT_ERROR,
+      payload: {msg: err.response.statusText, status: err.response.status}
+    });
+  }
+};
+
+//remove gift
+// export const removeGift = (recipientId, giftId) => async dispatch => {
+  
+//   try {
+//     const response = await axios.delete(`http://localhost:3001/recipients/${recipientId}`, formData, 
+//     config);
+
+//     dispatch({
+//       type: ADD_GIFT,
+//       payload: response.data
+//     })
+//     console.log(response.data);
+//     dispatch(setAlert('Gift Added', 'success'));
+
+//   } catch (err) {
+//     dispatch({
+//       type: RECIPIENT_ERROR,
+//       payload: {msg: err.response.statusText, status: err.response.status}
+//     });
+//   }
+// };
