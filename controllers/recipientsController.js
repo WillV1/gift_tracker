@@ -25,7 +25,7 @@ router.get('/', auth, async (req, res) => {
 //show recipient
 router.get('/:id', auth, async (req, res) => {
   try {
-    const result = await db.Recipient.findById(req.params.id, "-__v")
+    const result = await db.Recipient.findById(req.params.id)
 
     if(!result) {
       return res.status(404).json({msg: 'Recipient not found'})
@@ -108,7 +108,7 @@ router.post('/gift/:id', [auth, [
 
     res.json(recipient.gifts);
 
-  } catch {
+  } catch(err) {
     console.log(err.message);
     res.status(500).send('Server error');
   }

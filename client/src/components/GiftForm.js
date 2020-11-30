@@ -1,10 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { addGift } from '../actions/recipient';
+import { addGift, getRecipient } from '../actions/recipient';
 import M from "materialize-css";
 
-const GiftForm = ({ recipientId, addGift}) => {
+const GiftForm = ({ addGift, getRecipient, recipient: { recipient, loading}, match }) => {
+
+  useEffect(() => {
+    getRecipient(match.params.id);
+  },[getRecipient])
 
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
@@ -21,7 +25,7 @@ const GiftForm = ({ recipientId, addGift}) => {
   const onSubmit = async e => {
     e.preventDefault();
 
-    addGift(recipientId, {name, price, quantity, purchased});
+    addGift(recipient._id, {name, price, quantity, purchased});
     
     setName('')
     setPrice('')
@@ -79,7 +83,13 @@ const GiftForm = ({ recipientId, addGift}) => {
 }
 
   GiftForm.propTypes = {
-  addGift: PropTypes.func.isRequired
+  addGift: PropTypes.func.isRequired,
+  getRecipient: PropTypes.func.isRequired,
+  recipient: PropTypes.object.isRequired
   }
 
-  export default connect(null, { addGift}) (GiftForm);
+  const mapStateToProps = state => ({
+    recipient: state.recipient
+  });
+
+  export default connect(mapStateToProps, { addGift, getRecipient}) (GiftForm);

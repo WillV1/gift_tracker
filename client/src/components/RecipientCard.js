@@ -52,7 +52,7 @@ const RecipientCard = ({ deleteRecipient, auth, recipient: { name, relationship,
 RecipientCard.propTypes = {
   recipient: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  deleteRecipient: PropTypes.func.isRequired
+  // deleteRecipient: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
