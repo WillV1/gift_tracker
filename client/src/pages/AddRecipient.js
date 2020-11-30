@@ -5,33 +5,16 @@ import { addRecipient } from '../actions/recipient';
 
 const AddRecipent = ({addRecipient}) => {
 
-    const [state, setState] = useState({
-      name: '',
-      relationship: '',
-      budget: '',
-      image: null
-    })
+    const [name, setName] = useState('')
+    const [relationship, setRelationship] = useState('')
+    const [budget, setBudget] = useState('')
+    const [image, setImage] = useState('')
 
-    const { name, relationship, budget, image } = state;
-
-    const onChange = (e) => {
-      setState({
-        ...state,
-        [e.target.name]: e.target.value
-      });
-    };
 
     const onSubmit = async e => {
       e.preventDefault();
 
       addRecipient({name, relationship, budget, image});
-
-      setState({
-        name: '',
-        relationship: '',
-        budget: '',
-        image: null
-      });
       
     };
 
@@ -39,27 +22,27 @@ const AddRecipent = ({addRecipient}) => {
     <div>
       <h3 className="center-align">Add Recipient</h3>
       <div className="row">
-    <form className="col s6" onSubmit={e => onSubmit(e)} method="post" enctype="multipart/form-data">
+    <form className="col s6" onSubmit={e => onSubmit(e)} method="post" encType="multipart/form-data">
       <div className="row">
       <div className="input-field col s6 offset-s10">
-        <input name="name" id="name" type="text" value={name}
-        onChange={e => onChange(e)}
+        <input id="name" type="text" value={name}
+        onChange={e => setName(e.target.value)}
         className="validate" required/>
         <label htmlFor="name">Name</label>
       </div>
       </div>
       <div className="row">
         <div className="input-field col s6 offset-s10">
-          <input name="relationship" id="relationship" type="text" value={relationship}
-          onChange={e => onChange(e)} 
+          <input id="relationship" type="text" value={relationship}
+          onChange={e => setRelationship(e.target.value)} 
           className="validate" required/>
           <label htmlFor="relationship">Relationship</label>
         </div>
       </div>
       <div className="row">
         <div className="input-field col s6 offset-s10">
-          <input name="budget" id="budget" type="number" value={budget}
-          onChange={e => onChange(e)}
+          <input id="budget" type="number" value={budget}
+          onChange={e => setBudget(e.target.value)}
           className="validate" required/>
           <label htmlFor="budget">Budget</label>
         </div>
@@ -68,11 +51,10 @@ const AddRecipent = ({addRecipient}) => {
         <div className="file-field input-field  col s6 offset-s10">
           <div className="btn">
             <span>File</span>
-            <input type="file" name="image" onChange={e => onChange(e)} value={image}/>
+            <input type="file" onChange={e => setImage(e.target.files[0])}/>
           </div>
           <div className="file-path-wrapper">
-            <input className="file-path validate" name="image" onChange={e => onChange(e)} 
-            value={image} type="text" />
+            <input className="file-path validate" type="text" />
           </div>
         </div>
       </div>

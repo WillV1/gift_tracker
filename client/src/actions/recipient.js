@@ -43,16 +43,22 @@ export const deleteRecipient = id => async dispatch => {
 //add recipient
 export const addRecipient = formData => async dispatch => {
 
+  const { name, relationship, budget, image } = formData;
 
-  // const config = {
-  //   headers: { 
-  //     Accept: 'application/json',
-  //     'Content-Type': 'multipart/form-data'
-  //   }
-  // }
+  const data = new FormData();
+  data.append('name', name);
+  data.append('image', image);
+  data.append('relationship', relationship);
+  data.append('budget', budget);
+
+  const config = {
+    headers: { 
+      'Content-Type': 'multipart/form-data'
+    }
+  }
   
   try {
-    const response = await axios.post(`http://localhost:3001/recipients/`, formData);
+    const response = await axios.post(`http://localhost:3001/recipients/`, data, config);
 
     dispatch({
       type: ADD_RECIPIENT,
