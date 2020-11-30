@@ -17,7 +17,7 @@ const RecipientCard = ({ deleteRecipient, auth, recipient: { name, relationship,
         </div>
         <div className="col s4">
           <h5>Budget: <span>${budget}</span></h5>
-          <h5>Actual: <span>$</span></h5>
+          
           <Link to={'/addgift'} className="waves-effect waves-light btn-small">
           Add Gift</Link>
         </div>

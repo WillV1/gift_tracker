@@ -15,7 +15,7 @@ const Recipient = ({ getRecipient, recipient: { recipient, loading}, match }) =>
   return loading || recipient === null ? <Spinner /> : <Fragment>
     <RecipientCard recipient={recipient} />
     {recipient.gifts.map(gift => {
-      return <GiftCard key={gift._id} giftItem={gift} recipientId={recipient._id}/>
+      return <GiftCard key={gift._id} gift={gift} recipientId={recipient._id}/>
     })}
   </Fragment>
 }

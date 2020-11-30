@@ -8,14 +8,17 @@ const GiftCard = ({recipientId, gift: { _id, name, price, recipient, quantity, p
   return (
     <div className="container">
       <div className="row">
-        <div className="col s3">
+        <div className="col s2">
           {name}
         </div>
-        <div className="col s3">
+        <div className="col s2">
           {price}
         </div>
-        <div className="col s3">
-          {purchased}
+        <div className="col s2">
+          {quantity}
+        </div>
+        <div className="col s2">
+          {purchased === true ? <h6>Yes</h6> : <h6>No</h6>}
         </div>
         <div className="col s4">
           <button className="waves-effect waves-light btn-small">Edit</button>
@@ -24,6 +27,11 @@ const GiftCard = ({recipientId, gift: { _id, name, price, recipient, quantity, p
               className="waves-effect waves-light red btn-small">Delete</button>
           )}
           
+        </div>
+      </div>
+      <div className="row">
+        <div className="col s12">
+        <h5>Actual: <span>$</span></h5>
         </div>
       </div>
     </div>

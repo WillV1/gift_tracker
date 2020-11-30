@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 import { GET_RECIPIENTS, RECIPIENT_ERROR, DELETE_RECIPIENT, 
-  ADD_RECIPIENT, GET_RECIPIENT, ADD_GIFT, EDIT_GIFT, REMOVE_GIFT } from './types';
+  ADD_RECIPIENT, EDIT_RECIPIENT, GET_RECIPIENT, ADD_GIFT, EDIT_GIFT, REMOVE_GIFT } from './types';
 
 //get recipients
 export const getRecipients = () => async dispatch => {
@@ -66,6 +66,33 @@ export const addRecipient = formData => async dispatch => {
     })
     console.log(response.data);
     dispatch(setAlert('Recipient Added', 'success'));
+
+  } catch (err) {
+    dispatch({
+      type: RECIPIENT_ERROR,
+      payload: {msg: err.response.statusText, status: err.response.status}
+    });
+  }
+};
+
+//edit recipient
+export const editRecipient = (id, formData) => async dispatch => {
+  try {
+
+    const config = {
+      headers: { 
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const response = await axios.put(`http://localhost:3001/recipients/${id}`, formData, config);
+
+    dispatch({
+      type: EDIT_RECIPIENT,
+      payload: response.data
+    })
+
+    dispatch(setAlert('Recipient Edited', 'success'));
 
   } catch (err) {
     dispatch({
