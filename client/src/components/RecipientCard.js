@@ -3,18 +3,23 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 // import { deleteRecipient } from '../actions/recipient';
 
-const RecipientItem = ({ deleteRecipient, auth, recipient: { name, relationship, budget }}) => {
+
+const RecipientCard = ({ deleteRecipient, auth, recipient: { name, relationship, budget, image }}) => {
+
+
   return (
     <div className="container">
       <div className="row">
         <div className="col s4">
+          <img src={image} alt={name} />
           <h3>{name}</h3>
           <h5>{relationship}</h5>
         </div>
         <div className="col s4">
           <h5>Budget: <span>${budget}</span></h5>
           <h5>Actual: <span>$</span></h5>
-          <button className="waves-effect waves-light btn-small">Add Gift</button>
+          <Link to={'/addgift'} className="waves-effect waves-light btn-small">
+          Add Gift</Link>
         </div>
         <div className="col s4">
           {/*<button onClick={e => deleteRecipient(_id)} className="waves-effect waves-light btn-small">
@@ -22,20 +27,29 @@ const RecipientItem = ({ deleteRecipient, auth, recipient: { name, relationship,
         </div>
       </div>
       <div className="row">
-        <div className="col s4">
-          <h3>Gifts:</h3>
+        <div className="col s2">
+          <h6>Gift</h6>
         </div>
-        <div className="col s4">
-          <h3>Purchased?</h3>
+        <div className="col s2">
+          <h6>Price</h6>
         </div>
-        <div className="col s4">
+        <div className="col s2">
+          <h6>Quantity</h6>
+        </div>
+        <div className="col s2">
+          <h6>Purchased?</h6>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col s2">
+          
         </div>
       </div>
     </div>
   )
 }
 
-RecipientItem.propTypes = {
+RecipientCard.propTypes = {
   recipient: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   deleteRecipient: PropTypes.func.isRequired
@@ -48,4 +62,4 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps,
   // {deleteRecipient}
   )
-  (RecipientItem);
+  (RecipientCard);

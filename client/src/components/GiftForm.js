@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import { addGift } from '../actions/recipient';
 import M from "materialize-css";
 
-const GiftForm = ({addGift}) => {
+const GiftForm = ({ recipientId, addGift}) => {
 
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
@@ -18,9 +18,20 @@ const GiftForm = ({addGift}) => {
     // M.AutoInit();
   });
 
+  const onSubmit = async e => {
+    e.preventDefault();
+
+    addGift(recipientId, {name, price, quantity, purchased});
+    
+    setName('')
+    setPrice('')
+    setQuantity('')
+    setPurchased('')
+  };
+
   return (
     <div>
-    <h3 className="center-align">Add Recipient</h3>
+    <h3 className="center-align">Add Gift</h3>
     <div className="row">
     <form className="col s6" onSubmit={e => onSubmit(e)} method="post">
     <div className="row">
@@ -49,7 +60,7 @@ const GiftForm = ({addGift}) => {
     </div>
     <div className="row">
       <div className="input-field col s6 offset-s10">
-        <select>
+        <select value={purchased} onChange={e => setPurchased(e.target.value)}>
           <option value="" disabled selected>Choose your option</option>
           <option value="true">True</option>
           <option value="false">False</option>

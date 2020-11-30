@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getRecipient } from '../actions/recipient';
 import RecipientCard from '../components/RecipientCard';
+import GiftCard from '../components/GiftCard';
 
 const Recipient = ({ getRecipient, recipient: { recipient, loading}, match }) => {
 
@@ -13,6 +14,9 @@ const Recipient = ({ getRecipient, recipient: { recipient, loading}, match }) =>
 
   return loading || recipient === null ? <Spinner /> : <Fragment>
     <RecipientCard recipient={recipient} />
+    {recipient.gifts.map(gift => {
+      return <GiftCard key={gift._id} giftItem={gift} recipientId={recipient._id}/>
+    })}
   </Fragment>
 }
 

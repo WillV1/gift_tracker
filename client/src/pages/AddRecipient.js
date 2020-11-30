@@ -16,6 +16,10 @@ const AddRecipent = ({addRecipient}) => {
 
       addRecipient({name, relationship, budget, image});
       
+      setName('')
+      setRelationship('')
+      setBudget('')
+      setImage('')
     };
 
   return (
