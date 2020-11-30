@@ -3,6 +3,7 @@ import {
   RECIPIENT_ERROR,
   DELETE_RECIPIENT,
   ADD_RECIPIENT,
+  EDIT_RECIPIENT,
   GET_RECIPIENT,
   ADD_GIFT,
   REMOVE_GIFT
@@ -38,6 +39,12 @@ export default function recipients(state = initialState, action) {
         ...state,
         recipients: [...state.recipients, payload],
         loading: false
+      }
+
+    case EDIT_RECIPIENT: 
+      return {
+        ...state,
+        recipients: 
       }
     case DELETE_RECIPIENT:
       return {

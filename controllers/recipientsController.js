@@ -118,18 +118,10 @@ router.post('/gift/:id', [auth, [
 router.put('/:id', auth, async (req, res) => {
   try {
 
-    const name = req.body.name;
-    const price = req.body.price;
-    const quantity = req.body.quantity;
-    const purchased = req.body.purchased;
-
     const recipient = await db.Recipient.findByIdAndUpdate(
       req.params.id,
-      {$push: {"gifts": {name: name, 
-      price: price,
-      quantity: quantity,
-      purchased: purchased}}},
-      {safe: true, upsert: true, new: true},
+      req.body,
+      {new: true},
       );
     res.json(recipient)
 
