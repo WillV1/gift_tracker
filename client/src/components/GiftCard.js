@@ -29,6 +29,8 @@ const RecipientItem = ({ deleteRecipient, auth, recipient: { name, relationship,
           <h3>Purchased?</h3>
         </div>
         <div className="col s4">
+          <button className="waves-effect waves-light btn-small">Edit</button>
+          <button className="waves-effect waves-light btn-small">Delete</button>
         </div>
       </div>
     </div>

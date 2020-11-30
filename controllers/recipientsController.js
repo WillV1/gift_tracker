@@ -30,7 +30,7 @@ router.get('/:id', auth, async (req, res) => {
     if(!result) {
       return res.status(404).json({msg: 'Recipient not found'})
     };
-    res.json({result})
+    res.json(result)
     
   } catch(err) {
     console.log(err.message);

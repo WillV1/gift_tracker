@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getRecipient } from '../actions/recipient';
+import RecipientCard from '../components/RecipientCard';
 
 const Recipient = ({ getRecipient, recipient: { recipient, loading}, match }) => {
 
@@ -10,11 +11,9 @@ const Recipient = ({ getRecipient, recipient: { recipient, loading}, match }) =>
     getRecipient(match.params.id);
   }, [getRecipient]);
 
-  return (
-    <div>
-      <h1>post</h1>
-    </div>
-  )
+  return loading || recipient === null ? <Spinner /> : <Fragment>
+    <RecipientCard recipient={recipient} />
+  </Fragment>
 }
 
 Recipient.propTypes = {

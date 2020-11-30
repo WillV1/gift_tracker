@@ -12,3 +12,6 @@ export const RECIPIENT_ERROR = 'RECIPIENT_ERROR';
 export const DELETE_RECIPIENT = 'DELETE_RECIPIENT';
 export const ADD_RECIPIENT = 'ADD_RECIPIENT';
 export const GET_RECIPIENT = 'GET_RECIPIENT';
+export const ADD_GIFT = 'ADD_GIFT';
+export const EDIT_GIFT = 'EDIT_GIFT';
+export const REMOVE_GIFT = 'REMOVE_GIFT';
