@@ -119,7 +119,7 @@ router.put('/:id', auth, async (req, res) => {
   try {
 
     const recipient = await db.Recipient.findByIdAndUpdate(
-      req.params._id,
+      req.params.id,
       req.body,
       {new: true},
       );

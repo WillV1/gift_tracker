@@ -34,12 +34,12 @@ export default function recipients(state = initialState, action) {
         recipient: payload,
         loading: false
       }
-    // case ADD_RECIPIENT:
-    //   return {
-    //     ...state,
-    //     recipients: [...state.recipients, payload],
-    //     loading: false
-    //   }
+    case ADD_RECIPIENT:
+      return {
+        ...state,
+        recipients: [...state.recipients, payload],
+        loading: false
+      }
 
     case EDIT_RECIPIENT: 
       return {

@@ -41,39 +41,39 @@ export const deleteRecipient = id => async dispatch => {
 };
 
 //add recipient
-// export const addRecipient = formData => async dispatch => {
+export const addRecipient = formData => async dispatch => {
 
-//   const { name, relationship, budget, image } = formData;
+  const { name, relationship, budget, image } = formData;
 
-//   const data = new FormData();
-//   data.append('name', name);
-//   data.append('image', image);
-//   data.append('relationship', relationship);
-//   data.append('budget', budget);
+  const data = new FormData();
+  data.append('name', name);
+  data.append('image', image);
+  data.append('relationship', relationship);
+  data.append('budget', budget);
 
-//   const config = {
-//     headers: { 
-//       'Content-Type': 'multipart/form-data'
-//     }
-//   }
+  const config = {
+    headers: { 
+      'Content-Type': 'multipart/form-data'
+    }
+  }
   
-//   try {
-//     const response = await axios.post(`http://localhost:3001/recipients/`, data, config);
+  try {
+    const response = await axios.post(`http://localhost:3001/recipients/`, data, config);
 
-//     dispatch({
-//       type: ADD_RECIPIENT,
-//       payload: response.data
-//     })
-//     console.log(response.data);
-//     dispatch(setAlert('Recipient Added', 'success'));
+    dispatch({
+      type: ADD_RECIPIENT,
+      payload: response.data
+    })
+    console.log(response.data);
+    dispatch(setAlert('Recipient Added', 'success'));
 
-//   } catch (err) {
-//     dispatch({
-//       type: RECIPIENT_ERROR,
-//       payload: {msg: err.response.statusText, status: err.response.status}
-//     });
-//   }
-// };
+  } catch (err) {
+    dispatch({
+      type: RECIPIENT_ERROR,
+      payload: {msg: err.response.statusText, status: err.response.status}
+    });
+  }
+};
 
 //get recipient
 export const getRecipient = id => async dispatch => {
@@ -130,7 +130,7 @@ export const addGift = (recipientId, formData) => async dispatch => {
   }
   
   try {
-    const response = await axios.post(`http://localhost:3001/recipients/gift/${recipientId}`, formData, 
+    const response = await axios.put(`http://localhost:3001/recipients/${recipientId}`, formData, 
     config);
 
     dispatch({
