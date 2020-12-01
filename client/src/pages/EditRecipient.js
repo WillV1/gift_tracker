@@ -6,10 +6,6 @@ import { editRecipient } from '../actions/recipient';
 
 const EditRecipient = ({getRecipient, editRecipient, recipient: { recipient, loading}, match }) => {
 
-  useEffect(() => {
-    getRecipient(match.params.id);
-  }, [getRecipient]);
-
     const [name, setName] = useState('')
     const [relationship, setRelationship] = useState('')
     const [budget, setBudget] = useState('')

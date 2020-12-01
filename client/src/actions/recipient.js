@@ -131,7 +131,7 @@ export const addGift = (recipientId, formData) => async dispatch => {
   }
   
   try {
-    const response = await axios.put(`http://localhost:3001/recipients/${recipientId}`, formData, 
+    const response = await axios.post(`http://localhost:3001/recipients/gift/${recipientId}`, formData, 
     config);
 
     dispatch({
