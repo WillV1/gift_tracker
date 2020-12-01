@@ -13,7 +13,7 @@ const Recipient = ({ getRecipient, recipient: { recipient, loading}, match }) =>
   }, [getRecipient]);
 
   return loading || recipient === null ? <Spinner /> : <Fragment>
-    <RecipientCard recipient={recipient} />
+    <RecipientCard recipient={recipient} recipientId={recipient._id} />
     {recipient.gifts.map(gift => {
       return <GiftCard key={gift._id} gift={gift} recipientId={recipient._id}/>
     })}

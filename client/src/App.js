@@ -12,6 +12,7 @@ import About from './pages/About';
 import Budget from './pages/Budget';
 import Recipient from './pages/Recipient';
 import AddRecipient from './pages/AddRecipient';
+import EditRecipient from './pages/EditRecipient';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
 import Main from './pages/Main';
@@ -55,6 +56,7 @@ function App() {
       <Route path="/new" component={AddRecipient} />
       <Route path="/addgift" component={GiftForm} />
       <PrivateRoute path="/recipient/:id" component={Recipient} />
+      <Route path="/edit/:id" component={EditRecipient} />
       <Route component={NotFoundPage} />
     </Switch>
     </div>

@@ -41,42 +41,60 @@ export const deleteRecipient = id => async dispatch => {
 };
 
 //add recipient
-export const addRecipient = formData => async dispatch => {
+// export const addRecipient = formData => async dispatch => {
 
-  const { name, relationship, budget, image } = formData;
+//   const { name, relationship, budget, image } = formData;
 
-  const data = new FormData();
-  data.append('name', name);
-  data.append('image', image);
-  data.append('relationship', relationship);
-  data.append('budget', budget);
+//   const data = new FormData();
+//   data.append('name', name);
+//   data.append('image', image);
+//   data.append('relationship', relationship);
+//   data.append('budget', budget);
 
-  const config = {
-    headers: { 
-      'Content-Type': 'multipart/form-data'
-    }
-  }
+//   const config = {
+//     headers: { 
+//       'Content-Type': 'multipart/form-data'
+//     }
+//   }
   
+//   try {
+//     const response = await axios.post(`http://localhost:3001/recipients/`, data, config);
+
+//     dispatch({
+//       type: ADD_RECIPIENT,
+//       payload: response.data
+//     })
+//     console.log(response.data);
+//     dispatch(setAlert('Recipient Added', 'success'));
+
+//   } catch (err) {
+//     dispatch({
+//       type: RECIPIENT_ERROR,
+//       payload: {msg: err.response.statusText, status: err.response.status}
+//     });
+//   }
+// };
+
+//get recipient
+export const getRecipient = id => async dispatch => {
   try {
-    const response = await axios.post(`http://localhost:3001/recipients/`, data, config);
+    const response = await axios.get(`http://localhost:3001/recipients/${id}`);
 
     dispatch({
-      type: ADD_RECIPIENT,
+      type: GET_RECIPIENT,
       payload: response.data
-    })
-    console.log(response.data);
-    dispatch(setAlert('Recipient Added', 'success'));
-
+    });
   } catch (err) {
     dispatch({
       type: RECIPIENT_ERROR,
       payload: {msg: err.response.statusText, status: err.response.status}
     });
   }
-};
+}
 
 //edit recipient
 export const editRecipient = (id, formData) => async dispatch => {
+
   try {
 
     const config = {
@@ -101,23 +119,6 @@ export const editRecipient = (id, formData) => async dispatch => {
     });
   }
 };
-
-//get recipient
-export const getRecipient = id => async dispatch => {
-  try {
-    const response = await axios.get(`http://localhost:3001/recipients/${id}`);
-
-    dispatch({
-      type: GET_RECIPIENT,
-      payload: response.data
-    });
-  } catch (err) {
-    dispatch({
-      type: RECIPIENT_ERROR,
-      payload: {msg: err.response.statusText, status: err.response.status}
-    });
-  }
-}
 
 //add gift
 export const addGift = (recipientId, formData) => async dispatch => {

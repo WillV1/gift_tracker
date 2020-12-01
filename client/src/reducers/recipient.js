@@ -34,17 +34,18 @@ export default function recipients(state = initialState, action) {
         recipient: payload,
         loading: false
       }
-    case ADD_RECIPIENT:
-      return {
-        ...state,
-        recipients: [...state.recipients, payload],
-        loading: false
-      }
+    // case ADD_RECIPIENT:
+    //   return {
+    //     ...state,
+    //     recipients: [...state.recipients, payload],
+    //     loading: false
+    //   }
 
     case EDIT_RECIPIENT: 
       return {
         ...state,
-        recipients: 
+        recipients: state.recipients.map(recipient => recipient._id === payload._id ? 
+          recipient = payload : recipient)
       }
     case DELETE_RECIPIENT:
       return {
