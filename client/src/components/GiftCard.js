@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { removeGift } from '../actions/recipient';
+import SumTotal from '../components/SumTotal';
 
 const GiftCard = ({recipientId, gift: { _id, name, price, recipient, quantity, purchased}, 
   auth, removeGift}) => {
@@ -22,16 +23,8 @@ const GiftCard = ({recipientId, gift: { _id, name, price, recipient, quantity, p
         </div>
         <div className="col s4">
           <button className="waves-effect waves-light btn-small">Edit</button>
-          {!auth.loading && recipient === auth.user._id && (
-            <button onClick={e => removeGift(recipientId, _id)}
-              className="waves-effect waves-light red btn-small">Delete</button>
-          )}
-          
-        </div>
-      </div>
-      <div className="row">
-        <div className="col s12">
-        <h5>Actual: <span>$</span></h5>
+          <button onClick={e => removeGift(recipientId, _id)}
+            className="waves-effect waves-light red btn-small">Delete</button>
         </div>
       </div>
     </div>

@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 // import { deleteRecipient } from '../actions/recipient';
+import SumTotal from './SumTotal';
 
-const RecipientCard = ({ deleteRecipient, auth, recipient: { _id, name, relationship, budget, image }}) => {
+const RecipientCard = ({ deleteRecipient, auth, recipient: { _id, name, relationship, budget, image, gifts }}) => {
 
 
   return (
@@ -16,6 +17,7 @@ const RecipientCard = ({ deleteRecipient, auth, recipient: { _id, name, relation
         </div>
         <div className="col s4">
           <h5>Budget: <span>${budget}</span></h5>
+          <SumTotal gift={gifts} />
           <Link to={{ pathname:`/recipient/${_id}/edit`, state: {recipient: _id}}} 
           className="waves-effect waves-light btn-small">
           Edit Recipient</Link>

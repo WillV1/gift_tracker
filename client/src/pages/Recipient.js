@@ -6,6 +6,7 @@ import { getRecipient } from '../actions/recipient';
 import RecipientCard from '../components/RecipientCard';
 import GiftCard from '../components/GiftCard';
 
+
 const Recipient = ({ getRecipient, recipient: { recipient, loading}, match }) => {
 
   useEffect(() => {
