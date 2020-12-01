@@ -55,8 +55,8 @@ function App() {
       <Route path="/budget" component={Budget} />
       <Route path="/new" component={AddRecipient} />
       <Route path="/addgift" component={GiftForm} />
-      <PrivateRoute path="/recipient/:id" component={Recipient} />
-      <Route path="/edit/:id" component={EditRecipient} />
+      <PrivateRoute exact path="/recipient/:id" component={Recipient} />
+      <Route path="/recipient/:id/edit" component={EditRecipient} />
       <Route component={NotFoundPage} />
     </Switch>
     </div>

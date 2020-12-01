@@ -40,18 +40,18 @@ export default function recipients(state = initialState, action) {
         recipients: [...state.recipients, payload],
         loading: false
       }
+    case DELETE_RECIPIENT:
+      return {
+        ...state,
+        recipients: state.recipients.filter(recipient => recipient._id !== payload),
+        loading: false
+      }
 
     case EDIT_RECIPIENT: 
       return {
         ...state,
         recipients: state.recipients.map(recipient => recipient._id === payload._id ? 
           recipient = payload : recipient)
-      }
-    case DELETE_RECIPIENT:
-      return {
-        ...state,
-        recipients: state.recipients.filter(recipient => recipient._id !== payload),
-        loading: false
       }
     case RECIPIENT_ERROR:
       return {

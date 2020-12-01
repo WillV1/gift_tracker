@@ -1,9 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getRecipient } from '../actions/recipient';
 import { editRecipient } from '../actions/recipient';
 
-const EditRecipient = ({editRecipient, recipient: { recipient, loading}, match }) => {
+const EditRecipient = ({getRecipient, editRecipient, recipient: { recipient, loading}, match }) => {
+
+  useEffect(() => {
+    getRecipient(match.params.id);
+  }, [getRecipient]);
 
     const [name, setName] = useState('')
     const [relationship, setRelationship] = useState('')
@@ -12,7 +17,7 @@ const EditRecipient = ({editRecipient, recipient: { recipient, loading}, match }
     const onSubmit = async e => {
       e.preventDefault();
 
-      editRecipient({ name, relationship, budget});
+      editRecipient(recipient._id, { name, relationship, budget});
       
       setName('')
       setRelationship('')
@@ -59,7 +64,9 @@ const EditRecipient = ({editRecipient, recipient: { recipient, loading}, match }
 }
 
 EditRecipient.propTypes = {
-editRecipient: PropTypes.func.isRequired
+editRecipient: PropTypes.func.isRequired,
+getRecipient: PropTypes.func.isRequired,
+recipient: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -67,4 +74,4 @@ const mapStateToProps = state => ({
   recipient: state.recipient
 });
 
-export default connect(mapStateToProps, {editRecipient})(EditRecipient);
+export default connect(mapStateToProps, {getRecipient, editRecipient})(EditRecipient);

@@ -40,6 +40,35 @@ export const deleteRecipient = id => async dispatch => {
   }
 };
 
+//edit recipient
+export const editRecipient = (id, formData) => async dispatch => {
+  console.log(id)
+  try {
+
+    const config = {
+      headers: { 
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const response = await axios.put(`http://localhost:3001/recipients/${id}`, 
+    formData, config);
+
+    dispatch({
+      type: EDIT_RECIPIENT,
+      payload: (id, response.data)
+    })
+
+    dispatch(setAlert('Recipient Edited', 'success'));
+
+  } catch (err) {
+    dispatch({
+      type: RECIPIENT_ERROR,
+      payload: {msg: err.response.statusText, status: err.response.status}
+    });
+  }
+};
+
 //add recipient
 export const addRecipient = formData => async dispatch => {
 
@@ -91,34 +120,6 @@ export const getRecipient = id => async dispatch => {
     });
   }
 }
-
-//edit recipient
-export const editRecipient = (id, formData) => async dispatch => {
-
-  try {
-
-    const config = {
-      headers: { 
-        'Content-Type': 'application/json'
-      }
-    }
-
-    const response = await axios.put(`http://localhost:3001/recipients/${id}`, formData, config);
-
-    dispatch({
-      type: EDIT_RECIPIENT,
-      payload: response.data
-    })
-
-    dispatch(setAlert('Recipient Edited', 'success'));
-
-  } catch (err) {
-    dispatch({
-      type: RECIPIENT_ERROR,
-      payload: {msg: err.response.statusText, status: err.response.status}
-    });
-  }
-};
 
 //add gift
 export const addGift = (recipientId, formData) => async dispatch => {
