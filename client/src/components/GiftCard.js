@@ -18,7 +18,7 @@ const GiftCard = ({recipientId, gift: { _id, name, price, recipient, quantity, p
           {quantity}
         </div>
         <div className="col s2">
-          {purchased === true ? <h6>Yes</h6> : <h6>No</h6>}
+          {purchased === true ? <span>Yes</span> : <span>No</span>}
         </div>
         <div className="col s4">
           <button className="waves-effect waves-light btn-small">Edit</button>

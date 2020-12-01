@@ -41,18 +41,9 @@ router.get('/:id', auth, async (req, res) => {
 
 //create recipient
 router.post('/', 
-[auth, 
-//   [
-//   check('name', 'Name is required').not().isEmpty(),
-//   check('budget', 'Budgeted amount is required').not().isEmpty()
-// ]
-], 
+[auth,], 
 upload.single('image'),
 async (req, res) => {
-  // const errors = validationResult(req);
-  // if(!errors.isEmpty()) {
-  //   return res.status(400).json({ errors: errors.array() })
-  // }
 
   try {
 
@@ -162,10 +153,6 @@ router.delete('/gift/:id/:gift_id', auth, async (req, res) => {
     if(!gift) {
       return res.status(404).json({msg: 'Gift does not exist'})
     }
-    
-    // if(gift.user !== req.user.id) {
-    //   return res.status(401).json({msg: 'User not authorized '})
-    // }
 
     const removedGift = recipient.gifts.filter(gift => gift.id !== gift._id)
 

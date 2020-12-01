@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 // import { deleteRecipient } from '../actions/recipient';
 
 const RecipientCard = ({ removeGift, auth, recipient: { _id, name, relationship, budget, image, gifts }}) => {
-
+    
+  let sum;
+  if(gifts.length) {
+    sum = gifts.filter(gift => gift.purchased === true).reduce((acc, val) => acc + val.price, 0);
+  }
 
   return (
     <div>
@@ -16,7 +20,7 @@ const RecipientCard = ({ removeGift, auth, recipient: { _id, name, relationship,
         </div>
         <div className="col s4">
           <h5>Budget: <span>${budget}</span></h5>
-          <h5>Actual: <span>${gifts.price}</span></h5>
+          <h5>Actual: <span>${sum}</span></h5>
           <Link to={{ pathname:`/recipient/${_id}/edit`, state: {recipient: _id}}} 
           className="waves-effect waves-light btn-small">
           Edit Recipient</Link>

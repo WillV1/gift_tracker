@@ -44,7 +44,7 @@ function App() {
     <div>
     <Router>
     <NavBar />
-    <div className="container">
+    <div className="container main-container">
     <Alert />
     <Switch>
       <Route exact path='/' component={Home} />
