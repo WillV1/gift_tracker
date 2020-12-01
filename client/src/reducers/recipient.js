@@ -6,6 +6,7 @@ import {
   EDIT_RECIPIENT,
   GET_RECIPIENT,
   ADD_GIFT,
+  EDIT_GIFT,
   REMOVE_GIFT
 } from '../actions/types';
 
@@ -51,7 +52,8 @@ export default function recipients(state = initialState, action) {
       return {
         ...state,
         recipients: state.recipients.map(recipient => recipient._id === payload._id ? 
-          recipient = payload : recipient)
+          recipient = payload : recipient),
+          loading: false
       }
     case RECIPIENT_ERROR:
       return {
@@ -64,6 +66,15 @@ export default function recipients(state = initialState, action) {
         ...state,
         recipient: {...state.recipient, gifts: payload},
         loading: false
+      }
+    case EDIT_GIFT: 
+      return {
+        ...state,
+        recipient: {
+          recipients: state.recipients.map(recipient => recipient._id === payload._id ? 
+            recipient = payload : recipient),
+            loading: false
+        }
       }
     case REMOVE_GIFT:
       return {

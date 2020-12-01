@@ -42,7 +42,7 @@ export const deleteRecipient = id => async dispatch => {
 
 //edit recipient
 export const editRecipient = (id, formData) => async dispatch => {
-  console.log(id)
+
   try {
 
     const config = {
@@ -140,6 +140,35 @@ export const addGift = (recipientId, formData) => async dispatch => {
     })
     console.log(response.data);
     dispatch(setAlert('Gift Added', 'success'));
+
+  } catch (err) {
+    dispatch({
+      type: RECIPIENT_ERROR,
+      payload: {msg: err.response.statusText, status: err.response.status}
+    });
+  }
+};
+
+//edit gift
+export const editGift = (recipientId, giftId, formData) => async dispatch => {
+  console.log(giftId)
+  try {
+
+    const config = {
+      headers: { 
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const response = await axios.put(`http://localhost:3001/recipients/gift/${recipientId}/${giftId}`,
+    formData, config);
+
+    dispatch({
+      type: EDIT_GIFT,
+      payload: (recipientId, giftId, response.data)
+    })
+
+    dispatch(setAlert('Gift Edited', 'success'));
 
   } catch (err) {
     dispatch({

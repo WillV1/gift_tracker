@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { removeGift } from '../actions/recipient';
-import SumTotal from '../components/SumTotal';
 
 const GiftCard = ({recipientId, gift: { _id, name, price, recipient, quantity, purchased}, 
   auth, removeGift}) => {

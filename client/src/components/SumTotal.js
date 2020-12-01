@@ -9,10 +9,9 @@ const SumTotal = ({recipientId, gift: { _id, name, price, recipient, quantity, p
     <div className="container">
       <div className="row">
         <div className="col s7">
-          <h5>Actual: <span>$</span></h5>
+          <h5>Actual: <span>${price}</span></h5>
         </div>  
         <div className="col s6">
-          {price}
         </div>
       </div>
     </div>

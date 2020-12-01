@@ -7,9 +7,6 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../middleware/auth');
 
-// const upload = require('../services/upload');
-// const { uploadImage, getImage } = require('./imageController');
-
 
 //get list of recipients
 router.get('/', auth, async (req, res) => {
@@ -157,21 +154,20 @@ router.delete('/:id', auth, async (req, res) => {
 router.delete('/gift/:id/:gift_id', auth, async (req, res) => {
   try {
     const recipient = await db.Recipient.findById(req.params.id);
-
-    const gift = recipient.gifts.find(gift => {
-      gift.id === req.params.gift_id});
-
+    
+    //Find gift
+    const gift = recipient.gifts.find(gift => 
+      gift.id === req.params.gift_id);
+      
     if(!gift) {
       return res.status(404).json({msg: 'Gift does not exist'})
     }
     
-    if(gift.user.toString() !== req.user.id) {
-      return res.status(401).json({msg: 'User not authorized '})
-    }
+    // if(gift.user !== req.user.id) {
+    //   return res.status(401).json({msg: 'User not authorized '})
+    // }
 
-    const removedGift = recipient.gifts
-      .map(gift => gift.user.toString())
-      .indexOf(req.user.id)
+    const removedGift = recipient.gifts.filter(gift => gift.id !== gift._id)
 
     recipient.gifts.splice(removedGift, 1)
 
