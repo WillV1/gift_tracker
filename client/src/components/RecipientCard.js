@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { deleteRecipient } from '../actions/recipient';
 
 const RecipientCard = ({ removeGift, auth, recipient: { _id, name, relationship, budget, image, gifts }}) => {
     
@@ -11,7 +10,7 @@ const RecipientCard = ({ removeGift, auth, recipient: { _id, name, relationship,
   }
 
   return (
-    <div>
+    <div className="container">
       <div className="row">
         <div className="col s4">
           <img src={image} alt={name} />
@@ -24,12 +23,10 @@ const RecipientCard = ({ removeGift, auth, recipient: { _id, name, relationship,
           <Link to={{ pathname:`/recipient/${_id}/edit`, state: {recipient: _id}}} 
           className="waves-effect waves-light btn-small">
           Edit Recipient</Link>
-          <Link to={`/recipient/${_id}/add`} className="waves-effect waves-light btn-small">
+          <Link to={`/recipient/${_id}/gift`} className="waves-effect waves-light btn-small">
           Add Gift</Link>
         </div>
         <div className="col s4">
-          {/*<button onClick={e => deleteRecipient(_id)} className="waves-effect waves-light btn-small">
-  Delete Recipient</button>*/}
         </div>
       </div>
       <div className="row">
@@ -65,6 +62,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps,
-  // {deleteRecipient}
   )
   (RecipientCard);

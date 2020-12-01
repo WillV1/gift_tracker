@@ -1,19 +1,27 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { addGift, getRecipient } from '../actions/recipient';
+import { addGift, editGift, getRecipient } from '../actions/recipient';
 import M from "materialize-css";
 
-const GiftForm = ({ addGift, getRecipient, recipient: { recipient, loading}, match }) => {
+const GiftForm = ({ addGift, editGift, getRecipient, editMode, 
+  recipient: { recipient, loading}, match }) => {
 
   useEffect(() => {
     getRecipient(match.params.id);
   },[getRecipient])
 
+  useEffect(() => {
+    editGift(match.params.id);
+  },[editGift])
+
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
     const [quantity, setQuantity] = useState('')
     const [purchased, setPurchased] = useState(false)
+
+    const pageTitle = editMode ? 'Edit Gift' : 'Add Gift';
+    const buttonTitle = editMode ? 'Update' : 'Submit';
 
 
   useEffect(() => {
@@ -34,8 +42,9 @@ const GiftForm = ({ addGift, getRecipient, recipient: { recipient, loading}, mat
   };
 
   return (
+    
     <div>
-    <h3 className="center-align">Add Gift</h3>
+    <h3 className="center-align">{pageTitle}</h3>
     <div className="row">
     <form className="col s6" onSubmit={e => onSubmit(e)} method="post">
     <div className="row">
@@ -73,7 +82,7 @@ const GiftForm = ({ addGift, getRecipient, recipient: { recipient, loading}, mat
       </div>
     </div>
     <div className="col s6 offset-s10">
-      <button className="btn waves-effect waves-light" type="submit" name="action">Submit
+      <button className="btn waves-effect waves-light" type="submit" name="action">{buttonTitle}
       </button>
     </div>
   </form>
@@ -85,11 +94,14 @@ const GiftForm = ({ addGift, getRecipient, recipient: { recipient, loading}, mat
   GiftForm.propTypes = {
   addGift: PropTypes.func.isRequired,
   getRecipient: PropTypes.func.isRequired,
-  recipient: PropTypes.object.isRequired
+  recipient: PropTypes.object.isRequired,
+  editGift: PropTypes.func.isRequired,
+  editMode: PropTypes.bool,
   }
 
   const mapStateToProps = state => ({
+    auth: state.auth,
     recipient: state.recipient
   });
 
-  export default connect(mapStateToProps, { addGift, getRecipient}) (GiftForm);
+  export default connect(mapStateToProps, { addGift, editGift, getRecipient}) (GiftForm);
