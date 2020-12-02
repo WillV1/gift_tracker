@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { removeGift } from '../actions/recipient';
@@ -6,7 +7,7 @@ import { removeGift } from '../actions/recipient';
 const GiftCard = ({recipientId, gift: { _id, name, price, quantity, purchased}, 
   auth, removeGift}) => {
 
-    console.log(_id);
+    // console.log(_id);
   return (
     <div className="container">
       <div className="row">
@@ -20,10 +21,12 @@ const GiftCard = ({recipientId, gift: { _id, name, price, quantity, purchased},
           {quantity}
         </div>
         <div className="col s2">
-          {purchased === true ? <h6>Yes</h6> : <h6>No</h6>}
+          {purchased === true ? <span>Yes</span> : <span>No</span>}
         </div>
         <div className="col s4">
-          <button className="waves-effect waves-light btn-small">Edit</button>
+        <Link 
+        to={{ pathname:`/recipient/${_id}/editgift`, state: {gift: _id}}}
+        className="waves-effect waves-light btn-small">Edit</Link>
           <button onClick={e => removeGift(recipientId, _id)}
             className="waves-effect waves-light red btn-small">Delete</button>
         </div>

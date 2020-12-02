@@ -2,7 +2,9 @@
 ## What is Gift Tracker?
 Need an easy way to track who you are purchasing gifts for those special moments and holidays?  Looking for a fast way to track how you are spending compared to what you budgeted? Look no further than Gift Tracker; the one stop shop for tracking who you are spending money on and how much you are spending.  Get rid of boring spreadsheets and say hello to Gift Tracker.
 
-## User Story
+## User Stories
+
+```
 As a user, I can quickly create a secure account using basic information, such as email and password. 
 
 As a user, I can see a dashboard of all people I plan to purchase gifts from, to determine if any 
@@ -22,6 +24,8 @@ As a user, I am provided graphaical statistics of my overall budgeted vs. actual
 
 As a user, I am provided a home and about page that explains the background of the app and 
 how to use the app.
+
+```
 
 ## Wireframes
 
@@ -46,6 +50,8 @@ blog - displays blog articles written by the realtors
 
 
 ## Milestones
+
+```
 Create Models/Schemas
 Create Backend (Server)
 Create API Routes for User, Recipients
@@ -60,7 +66,11 @@ Create Home and About Pages
 Create Forms to Add / Edit Gifts - Stretch
 Create Budget to Actual Chart - Stretch
 
+```
+
 ## Dependencies Installed
+
+```
 axios
 bcryptjs
 body-parser
@@ -81,9 +91,8 @@ react-router-dom
 redux
 redux-devtools-extension
 uuid
- 
 
-
+```
 
 ## Technologies
 Frontend - React, Materialize, CSS

@@ -6,13 +6,13 @@ import { editGift } from '../actions/recipient';
 import M from "materialize-css";
 
 const EditRecipient = ({getRecipient, getGift, editGift, 
-  // gift: {gift},
+  gift, 
   recipient: { recipient, loading}, match}) => {
 
   // const giftId = recipient.gifts.map(gift => gift)
 
-  console.log(recipient);
-  // console.log(giftId)
+  // console.log(recipient);
+  console.log(gift)
   
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')

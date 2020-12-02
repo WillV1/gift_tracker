@@ -74,7 +74,7 @@ export default function recipients(state = initialState, action) {
         ...state,
         recipient: {
           ...state.recipient,
-          gifts: state.recipients.gifts.map(gift => gift._id === payload),
+          gifts: state.recipients.gifts.map(gift => gift._id === payload._id),
           loading: false
         }
       }

@@ -40,30 +40,30 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 //show gift
-router.get('/gift/:id/:gift_id', auth, async (req, res) => {
-  try {
-    const recipient = await db.Recipient.findById(req.params.id);
+// router.get('/gift/:id/:gift_id', auth, async (req, res) => {
+//   try {
+//     const recipient = await db.Recipient.findById(req.params.id);
     
-    //Find gift
-    const gift = recipient.gifts.find(gift => 
-      gift.id === req.params.gift_id);
+//     //Find gift
+//     const gift = recipient.gifts.find(gift => 
+//       gift.id === req.params.gift_id);
       
-    if(!gift) {
-      return res.status(404).json({msg: 'Gift does not exist'})
-    }
+//     if(!gift) {
+//       return res.status(404).json({msg: 'Gift does not exist'})
+//     }
 
-    res.json(gift)
+//     res.json(gift)
     
-  } catch(err) {
-    console.log(err.message);
+//   } catch(err) {
+//     console.log(err.message);
 
-    if(err.kind === 'ObjectId') {
-      return res.status(404).json({msg: 'Recipient not found'})
-    };
+//     if(err.kind === 'ObjectId') {
+//       return res.status(404).json({msg: 'Recipient not found'})
+//     };
 
-    res.status(500).send('Server error');
-  }
-});
+//     res.status(500).send('Server error');
+//   }
+// });
 
 //create recipient
 router.post('/', 
