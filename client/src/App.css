@@ -25,6 +25,10 @@ h2, h3 {
   font-family: 'Fira Sans', sans-serif;
 }
 
+i {
+  color: black;
+}
+
 .gift-font {
   color: black;
   font-family: 'Sansita Swashed', cursive;

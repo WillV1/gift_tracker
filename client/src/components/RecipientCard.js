@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const RecipientCard = ({ removeGift, auth, recipient: { _id, name, relationship, budget, image, gifts }}) => {
+const RecipientCard = ({ auth, recipient: { _id, name, relationship, budget, image, gifts }}) => {
     
   let sum;
   if(gifts.length) {

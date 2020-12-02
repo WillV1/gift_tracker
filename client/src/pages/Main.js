@@ -36,7 +36,7 @@ const Main = ({ getRecipients, recipient: { recipients, loading} }) => {
 };
 
 Main.propTypes = {
-  getRecipient: PropTypes.func.isRequired,
+  getRecipients: PropTypes.func.isRequired,
   recipient: PropTypes.object.isRequired
 };
 

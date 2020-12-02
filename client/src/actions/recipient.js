@@ -151,6 +151,7 @@ export const addGift = (recipientId, formData) => async dispatch => {
 
 //edit gift
 export const editGift = (recipientId, giftId, formData) => async dispatch => {
+  console.log(recipientId)
   console.log(giftId)
   try {
 
@@ -188,7 +189,6 @@ export const removeGift = (recipientId, giftId) => async dispatch => {
       type: REMOVE_GIFT,
       payload: giftId
     })
-    console.log(response.data);
     dispatch(setAlert('Gift Removed', 'success'));
 
   } catch (err) {

@@ -55,7 +55,7 @@ async (req, res) => {
       relationship: req.body.relationship,
       budget: req.body.budget,
       user: req.user.id,
-      image: result.public_id
+      image: result.url
     })
   
     const recipient = await newRecipient.save();
