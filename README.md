@@ -25,7 +25,7 @@ how to use the app.
 
 ## Wireframes
 
-Landing Page - user will see a randomly selected list of featured homes, and a randomly selected realtor of the month.
+<!-- Landing Page - user will see a randomly selected list of featured homes, and a randomly selected realtor of the month.
 ![image](./assets/landing_page.png)
 House Listings - Users will be able to scroll through all existing house listings which link to each house's show page.
 ![image](./assets/listing.png)
@@ -38,11 +38,11 @@ Realtor Show Page - Each realtor will have their own show page, with their info 
 cities page - shows all the cities the realty company works
 ![image](./assets/cities.png)
 blog - displays blog articles written by the realtors
-![image](./assets/Blog.png)
+![image](./assets/Blog.png) -->
 
 
 ## Data Models
-![image](./assets/ERD.png)
+![image](./assets/Gift_Tracker.png)
 
 
 ## Milestones
