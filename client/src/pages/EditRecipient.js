@@ -7,11 +7,15 @@ import { editRecipient } from '../actions/recipient';
 
 const EditRecipient = ({getRecipient, editRecipient, recipient: { recipient, loading}, match }) => {
 
-    const [name, setName] = useState('')
-    const [relationship, setRelationship] = useState('')
-    const [budget, setBudget] = useState('')
+    const [name, setName] = useState(recipient.name)
+    const [relationship, setRelationship] = useState(recipient.relationship)
+    const [budget, setBudget] = useState(recipient.budget)
 
     const history = useHistory();
+
+    useEffect(() => {
+      getRecipient(match.params.id);
+    },[getRecipient])
 
     const onSubmit = async e => {
       e.preventDefault();
