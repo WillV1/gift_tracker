@@ -23,7 +23,7 @@ const GiftCard = ({recipientId, gift: { _id, name, price, quantity, purchased},
         </div>
         <div className="col s4">
           <Link 
-          to={{ pathname:`/recipient/${_id}/editgift`, state: {recipient: recipientId}}}
+          to={{ pathname:`/recipient/${_id}/editgift`, state: {gift: _id}}}
           className="waves-effect waves-light btn-small">Edit</Link>
           <button onClick={e => removeGift(recipientId, _id)}
             className="waves-effect waves-light red btn-small">Delete</button>

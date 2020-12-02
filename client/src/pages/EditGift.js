@@ -5,7 +5,7 @@ import { getRecipient } from '../actions/recipient';
 import { editGift } from '../actions/recipient';
 import M from "materialize-css";
 
-const EditRecipient = ({getRecipient, editGift, recipient: { recipient, loading}, match }) => {
+const EditRecipient = ({getRecipient, editGift, recipient: { recipient, loading}, match}) => {
 
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
@@ -86,7 +86,8 @@ const EditRecipient = ({getRecipient, editGift, recipient: { recipient, loading}
 EditRecipient.propTypes = {
 editGift: PropTypes.func.isRequired,
 getRecipient: PropTypes.func.isRequired,
-recipient: PropTypes.object.isRequired
+recipient: PropTypes.object.isRequired,
+gift: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
