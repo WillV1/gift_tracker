@@ -12,9 +12,9 @@ const Main = ({ getRecipients, recipient: { recipients, loading} }) => {
     getRecipients();
   }, [getRecipients])
 
-  {recipients.map(recipient => (
-    <RecipientItem key={recipient._id} recipient={recipient}/>
-    ))}
+  // {recipients.map(recipient => (
+  //   <RecipientItem key={recipient._id} recipient={recipient}/>
+  //   ))}
 
   return loading ? <Spinner /> : <Fragment>
   <div className="container">
@@ -24,7 +24,7 @@ const Main = ({ getRecipients, recipient: { recipients, loading} }) => {
       </div>
 
       <PieChart data={[
-        {title: 'Gift Budget'}
+        {title: 'Gift Budget'},
         {title: 'Spent to Date'}
       ]}
       />
