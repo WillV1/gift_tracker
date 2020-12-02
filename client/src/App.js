@@ -16,6 +16,7 @@ import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
 import Main from './pages/Main';
 import GiftForm from './components/GiftForm';
+import EditGift from './pages/EditGift';
 import PrivateRoute from './routing/PrivateRoute';
 import NotFoundPage from './pages/NotFound';
 import Alert from './components/Alert';
@@ -53,7 +54,8 @@ function App() {
       <PrivateRoute path="/main" component={Main} />
       <Route path="/budget" component={Budget} />
       <Route path="/new" component={AddRecipient} />
-      <Route path="/recipient/:id/gift" component={GiftForm} />
+      <Route path="/recipient/:id/addgift" component={GiftForm} />
+      <Route path="/recipient/:id/editgift" component={EditGift} />
       <PrivateRoute exact path="/recipient/:id" component={Recipient} />
       <Route path="/recipient/:id/edit" component={EditRecipient} />
       <Route component={NotFoundPage} />

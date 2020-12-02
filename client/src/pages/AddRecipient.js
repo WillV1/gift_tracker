@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useHistory } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addRecipient } from '../actions/recipient';
@@ -10,6 +11,8 @@ const AddRecipent = ({addRecipient}) => {
     const [budget, setBudget] = useState('')
     const [image, setImage] = useState('')
 
+    const history = useHistory();
+
 
     const onSubmit = async e => {
       e.preventDefault();
@@ -19,6 +22,8 @@ const AddRecipent = ({addRecipient}) => {
       setName('')
       setRelationship('')
       setBudget('')
+
+      history.goBack();
       
     };
 

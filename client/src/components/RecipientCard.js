@@ -23,7 +23,7 @@ const RecipientCard = ({ removeGift, auth, recipient: { _id, name, relationship,
           <Link to={{ pathname:`/recipient/${_id}/edit`, state: {recipient: _id}}} 
           className="waves-effect waves-light btn-small">
           Edit Recipient</Link>
-          <Link to={`/recipient/${_id}/gift`} className="waves-effect waves-light btn-small">
+          <Link to={`/recipient/${_id}/addgift`} className="waves-effect waves-light btn-small">
           Add Gift</Link>
         </div>
         <div className="col s4">

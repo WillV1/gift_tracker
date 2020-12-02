@@ -14,7 +14,6 @@ import {
 const initialState = {
   recipients: [],
   recipient: null,
-  editMode: false,
   loading: true,
   error: {}
 }
@@ -74,7 +73,6 @@ export default function recipients(state = initialState, action) {
         recipient: {
           recipients: state.recipients.gifts.map(gift => gift._id === payload._id ? 
             gift = payload : gift),
-            editMode: true,
             loading: false
         }
       }

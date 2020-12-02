@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from "react-router-dom";
 import { connect } from 'react-redux';
 import { getRecipient } from '../actions/recipient';
 import { editRecipient } from '../actions/recipient';
@@ -10,6 +11,8 @@ const EditRecipient = ({getRecipient, editRecipient, recipient: { recipient, loa
     const [relationship, setRelationship] = useState('')
     const [budget, setBudget] = useState('')
 
+    const history = useHistory();
+
     const onSubmit = async e => {
       e.preventDefault();
 
@@ -18,6 +21,8 @@ const EditRecipient = ({getRecipient, editRecipient, recipient: { recipient, loa
       setName('')
       setRelationship('')
       setBudget('')
+
+      history.goBack();
     };
 
   return (
