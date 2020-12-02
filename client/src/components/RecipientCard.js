@@ -6,7 +6,7 @@ const RecipientCard = ({ auth, recipient: { _id, name, relationship, budget, ima
     
   let sum;
   if(gifts.length) {
-    sum = gifts.filter(gift => gift.purchased === true).reduce((acc, val) => acc + val.price, 0);
+    sum = gifts.filter(gift => gift.purchased === true).reduce((acc, val) => acc + (val.price * val.quantity), 0);
   }
 
   return (

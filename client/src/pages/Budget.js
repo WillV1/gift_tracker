@@ -8,13 +8,26 @@ import { PieChart } from 'react-minimal-pie-chart';
 
 const Main = ({ getRecipients, recipient: { recipients, loading} }) => {
 
+let recipientBudget;
+let amountSpent;
+
   useEffect(() => {
     getRecipients();
   }, [getRecipients])
 
-  // {recipients.map(recipient => (
-  //   <RecipientItem key={recipient._id} recipient={recipient}/>
-  //   ))}
+  console.log(recipients)
+  if(recipients.length) {
+recipientBudget  = recipients.map(recipient => recipient)
+.reduce((acc, val) => acc + val.budget, 0);
+
+amountSpent = recipients.map(recipient => recipient.gifts.filter(gift => gift.purchased === true)
+.reduce((acc, val) => acc + val.price, 0));
+}
+
+
+
+console.log(recipientBudget);
+console.log(amountSpent);
 
   return loading ? <Spinner /> : <Fragment>
   <div className="container">
@@ -24,7 +37,7 @@ const Main = ({ getRecipients, recipient: { recipients, loading} }) => {
       </div>
 
       <PieChart data={[
-        {title: 'Gift Budget'},
+        {title: 'Gift Budget', value: recipientBudget, color: '#E38627'},
         {title: 'Spent to Date'}
       ]}
       />

@@ -155,6 +155,7 @@ export const getGift = (recipientId, giftId) => async dispatch => {
   try {
     const response = await axios.get(`http://localhost:3001/recipients/gift/${recipientId}/${giftId}`);
 
+    console.log(response);
     dispatch({
       type: GET_GIFT,
       payload: (recipientId, giftId, response.data)
