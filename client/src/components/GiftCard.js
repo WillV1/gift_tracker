@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { removeGift } from '../actions/recipient';
 
-const GiftCard = ({recipientId, gift: { _id, name, price, recipient, quantity, purchased}, 
+const GiftCard = ({recipientId, gift: { _id, name, price, quantity, purchased}, 
   auth, removeGift}) => {
+
+    console.log(_id);
   return (
     <div className="container">
       <div className="row">

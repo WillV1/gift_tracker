@@ -40,30 +40,30 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 //show gift
-router.delete('/gift/:id/:gift_id', auth, async (req, res) => {
-  try {
-    const recipient = await db.Recipient.findById(req.params.id);
+// router.get('/gift/:id/:gift_id', auth, async (req, res) => {
+//   try {
+//     const recipient = await db.Recipient.findById(req.params.id);
     
-    //Find gift
-    const gift = recipient.gifts.find(gift => 
-      gift.id === req.params.gift_id);
+//     //Find gift
+//     const gift = recipient.gifts.find(gift => 
+//       gift.id === req.params.gift_id);
       
-    if(!gift) {
-      return res.status(404).json({msg: 'Gift does not exist'})
-    }
+//     if(!gift) {
+//       return res.status(404).json({msg: 'Gift does not exist'})
+//     }
 
-    res.json(gift)
+//     res.json(gift)
     
-  } catch(err) {
-    console.log(err.message);
+//   } catch(err) {
+//     console.log(err.message);
 
-    if(err.kind === 'ObjectId') {
-      return res.status(404).json({msg: 'Recipient not found'})
-    };
+//     if(err.kind === 'ObjectId') {
+//       return res.status(404).json({msg: 'Recipient not found'})
+//     };
 
-    res.status(500).send('Server error');
-  }
-});
+//     res.status(500).send('Server error');
+//   }
+// });
 
 //create recipient
 router.post('/', 
@@ -161,6 +161,31 @@ router.put('/gift/:id/:gift_id', auth, async (req, res) => {
 });
 
 
+
+//delete gift
+router.delete('/gift/:id/:gift_id', auth, async (req, res) => {
+  try {
+
+    const result = await db.Recipient.findById (
+      req.params.id,
+    )
+    const giftToDelete = result.gifts.id(req.params.gift_id)
+    giftToDelete.remove()
+    await result.save()
+
+    res.sendStatus(200)
+  } catch(err) {
+    console.log(err.message);
+
+    if(err.kind === 'ObjectId') {
+      return res.status(404).json({msg: 'Recipient not found'})
+    };
+
+    res.status(500).send('Server error');
+  }
+});
+
+
 //delete recipient
 router.delete('/:id', auth, async (req, res) => {
   try {
@@ -173,38 +198,6 @@ router.delete('/:id', auth, async (req, res) => {
     await result.remove();
 
     res.json({msg: 'Recipient removed'})
-  } catch(err) {
-    console.log(err.message);
-
-    if(err.kind === 'ObjectId') {
-      return res.status(404).json({msg: 'Recipient not found'})
-    };
-
-    res.status(500).send('Server error');
-  }
-});
-
-//delete gift
-router.delete('/gift/:id/:gift_id', auth, async (req, res) => {
-  try {
-    const recipient = await db.Recipient.findById(req.params.id);
-    
-    //Find gift
-    const gift = recipient.gifts.find(gift => 
-      gift.id === req.params.gift_id);
-      
-    if(!gift) {
-      return res.status(404).json({msg: 'Gift does not exist'})
-    }
-
-    const removedGift = recipient.gifts.filter(gift => gift.id !== gift._id)
-
-    recipient.gifts.splice(removedGift, 1)
-
-    await recipient.save();
-
-    res.json(recipient.gifts)
-    
   } catch(err) {
     console.log(err.message);
 
