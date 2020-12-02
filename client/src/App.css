@@ -29,6 +29,12 @@ i {
   color: black;
 }
 
+img {
+  width: 150px;
+  height: auto;
+  border-radius: 50%;
+}
+
 .gift-font {
   color: black;
   font-family: 'Sansita Swashed', cursive;
