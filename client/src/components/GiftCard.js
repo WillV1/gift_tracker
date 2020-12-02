@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { removeGift } from '../actions/recipient';
 
-const GiftCard = ({recipientId, gift: { _id, name, price, quantity, purchased}, 
+const GiftCard = ({recipientId, gift: { _id, name, price, recipient, quantity, purchased}, 
   auth, removeGift}) => {
   return (
     <div className="container">
@@ -19,12 +18,10 @@ const GiftCard = ({recipientId, gift: { _id, name, price, quantity, purchased},
           {quantity}
         </div>
         <div className="col s2">
-          {purchased === true ? <span>Yes</span> : <span>No</span>}
+          {purchased === true ? <h6>Yes</h6> : <h6>No</h6>}
         </div>
         <div className="col s4">
-          <Link 
-          to={{ pathname:`/recipient/${_id}/editgift`, state: {gift: _id}}}
-          className="waves-effect waves-light btn-small">Edit</Link>
+          <button className="waves-effect waves-light btn-small">Edit</button>
           <button onClick={e => removeGift(recipientId, _id)}
             className="waves-effect waves-light red btn-small">Delete</button>
         </div>
@@ -37,7 +34,7 @@ GiftCard.propTypes = {
   recipientId: PropTypes.number.isRequired,
   auth: PropTypes.object.isRequired,
   gift: PropTypes.object.isRequired,
-  removeGift: PropTypes.func.isRequired,
+  removeGift: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({

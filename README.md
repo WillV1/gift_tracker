@@ -3,13 +3,25 @@
 Need an easy way to track who you are purchasing gifts for those special moments and holidays?  Looking for a fast way to track how you are spending compared to what you budgeted? Look no further than Gift Tracker; the one stop shop for tracking who you are spending money on and how much you are spending.  Get rid of boring spreadsheets and say hello to Gift Tracker.
 
 ## User Story
-As a realtor, I want a secure web app that provides me the ability to create, update and delete listings in real time. 
+As a user, I can quickly create a secure account using basic information, such as email and password. 
 
-As a realtor, I want a web app that allows me to create blog articles that are relevant to my prospective clients in the homebuying process. 
+As a user, I can see a dashboard of all people I plan to purchase gifts from, to determine if any 
+additional people need to be added to the list. 
 
-As a realtor, I want to provide an application that provides the prospective home buyer the ability to view a comprehensive listing of houses for sale, along with associated realtors and cities served. Prospective home buyers will be able to find the site and come to a landing page showing a featured home or proceed to additional listing of houses, which the user will be able to click on a house listing to obtain more data, as well as the listing agent.
+As a user, I am provided a link from the dashboard to quickly and easily add new people I
+intend to purchase gifts. From the dashboard, I have the ability to view the recipient page or
+remove recipient, as necessary.
 
-Additionally, as a realtor, I want to provide the prospective home buyer the ability to search the regions served by Vanford Realty and associated homes in those regions as well as realtors serving those regions. 
+As a user, I am provided a unique page by recipient, that displays budgeted amount and actual
+amount spent on gifts.
+
+As a user, I am provided a listing of gifts that I intend or have purchased, as well as the ability
+to edit the status of the gift or delete the gift, as necessary.
+
+As a user, I am provided graphaical statistics of my overall budgeted vs. actual amount spent.
+
+As a user, I am provided a home and about page that explains the background of the app and 
+how to use the app.
 
 ## Wireframes
 
@@ -27,7 +39,6 @@ cities page - shows all the cities the realty company works
 ![image](./assets/cities.png)
 blog - displays blog articles written by the realtors
 ![image](./assets/Blog.png)
-
 
 
 ## Data Models

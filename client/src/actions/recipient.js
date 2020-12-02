@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 import { GET_RECIPIENTS, RECIPIENT_ERROR, DELETE_RECIPIENT, 
-  ADD_RECIPIENT, EDIT_RECIPIENT, GET_RECIPIENT, ADD_GIFT, EDIT_GIFT, REMOVE_GIFT } from './types';
+  ADD_RECIPIENT, EDIT_RECIPIENT, GET_RECIPIENT, ADD_GIFT, GET_GIFT, 
+  EDIT_GIFT, REMOVE_GIFT } from './types';
 
 //get recipients
 export const getRecipients = () => async dispatch => {
@@ -149,6 +150,23 @@ export const addGift = (recipientId, formData) => async dispatch => {
   }
 };
 
+//get gift
+export const getGift = (recipientId, giftId) => async dispatch => {
+  try {
+    const response = await axios.get(`http://localhost:3001/recipients/gift/${recipientId}/${giftId}`);
+
+    dispatch({
+      type: GET_GIFT,
+      payload: (recipientId, giftId, response.data)
+    });
+  } catch (err) {
+    dispatch({
+      type: RECIPIENT_ERROR,
+      payload: {msg: err.response.statusText, status: err.response.status}
+    });
+  }
+}
+
 //edit gift
 export const editGift = (recipientId, giftId, formData) => async dispatch => {
   console.log(recipientId)
@@ -183,7 +201,7 @@ export const editGift = (recipientId, giftId, formData) => async dispatch => {
 export const removeGift = (recipientId, giftId) => async dispatch => {
   
   try {
-    const response = await axios.delete(`http://localhost:3001/recipients/gift/${recipientId}/${giftId}`);
+    await axios.delete(`http://localhost:3001/recipients/gift/${recipientId}/${giftId}`);
 
     dispatch({
       type: REMOVE_GIFT,

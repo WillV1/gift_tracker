@@ -1,12 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getRecipient } from '../actions/recipient';
+import { getRecipient, getGift } from '../actions/recipient';
 import { editGift } from '../actions/recipient';
 import M from "materialize-css";
 
-const EditRecipient = ({getRecipient, editGift, gift, recipient: { recipient, loading}, match}) => {
+const EditRecipient = ({getRecipient, getGift, editGift, 
+  // gift: {gift},
+  recipient: { recipient, loading}, match}) => {
 
+  // const giftId = recipient.gifts.map(gift => gift)
+
+  console.log(recipient);
+  // console.log(giftId)
+  
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
   const [quantity, setQuantity] = useState('')
@@ -15,6 +22,10 @@ const EditRecipient = ({getRecipient, editGift, gift, recipient: { recipient, lo
     useEffect(() => {
       getRecipient(match.params.id);
     },[getRecipient])
+
+    useEffect(() => {
+      getGift(match.params.id);
+    },[getGift])
 
 
     useEffect(() => {
@@ -26,7 +37,7 @@ const EditRecipient = ({getRecipient, editGift, gift, recipient: { recipient, lo
     const onSubmit = async e => {
       e.preventDefault();
 
-      editGift(recipient._id, gift, {name, price, quantity, purchased});
+      editGift(recipient._id, {name, price, quantity, purchased});
       
       setName('')
       setPrice('')
@@ -86,6 +97,7 @@ const EditRecipient = ({getRecipient, editGift, gift, recipient: { recipient, lo
 EditRecipient.propTypes = {
 editGift: PropTypes.func.isRequired,
 getRecipient: PropTypes.func.isRequired,
+getGift: PropTypes.func.isRequired,
 recipient: PropTypes.object.isRequired,
 gift: PropTypes.object.isRequired,
 }
@@ -95,4 +107,4 @@ const mapStateToProps = state => ({
   recipient: state.recipient
 });
 
-export default connect(mapStateToProps, {getRecipient, editGift})(EditRecipient);
+export default connect(mapStateToProps, {getRecipient, getGift, editGift})(EditRecipient);

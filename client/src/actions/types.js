@@ -14,5 +14,6 @@ export const ADD_RECIPIENT = 'ADD_RECIPIENT';
 export const EDIT_RECIPIENT = 'EDIT_RECIPIENT';
 export const GET_RECIPIENT = 'GET_RECIPIENT';
 export const ADD_GIFT = 'ADD_GIFT';
+export const GET_GIFT = 'GET_GIFT';
 export const EDIT_GIFT = 'EDIT_GIFT';
 export const REMOVE_GIFT = 'REMOVE_GIFT';
