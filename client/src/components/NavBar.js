@@ -52,9 +52,9 @@ const NavBar = ({ auth: { isAuthenticated, loading}, logout}) => {
 
   return (
     <div>
-      <nav>
+      <nav className="transparentBG gift-font">
       <div className="nav-wrapper">
-        <Link to="/" className="brand-logo">Gift Tracker</Link>
+        <Link to="/" className="brand-logo black-text">Gift Tracker</Link>
         {!loading && <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>}
       </div>     
       </nav>

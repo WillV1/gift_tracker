@@ -5,7 +5,6 @@ import {
   Route
 } from "react-router-dom";
 import NavBar from './components/NavBar';
-import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 
@@ -60,7 +59,7 @@ function App() {
       <Route component={NotFoundPage} />
     </Switch>
     </div>
-    <Footer />
+
     </Router>
     </div>
     </Provider>

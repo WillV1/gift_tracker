@@ -8,12 +8,14 @@ const GiftForm = ({ addGift, editGift, getRecipient, editMode,
   recipient: { recipient, loading}, match }) => {
 
   useEffect(() => {
+    editGift(match.params.id);
+  },[editGift])
+
+  useEffect(() => {
     getRecipient(match.params.id);
   },[getRecipient])
 
-  useEffect(() => {
-    editGift(match.params.id);
-  },[editGift])
+
 
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')

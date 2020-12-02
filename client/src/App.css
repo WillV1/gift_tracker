@@ -9,11 +9,26 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  background-image: url("./images/pexels-pixabay-45238.jpg");
 }
 
 main {
   flex: 1 0 auto;
 }
+
+nav ul li a{
+  color: black;
+  font-family: 'Sansita Swashed', cursive;
+} 
+
+h2, h3 {
+  font-family: 'Fira Sans', sans-serif;
+}
+
+.gift-font {
+  color: black;
+  font-family: 'Sansita Swashed', cursive;
+} 
 
 .main-container {
   min-height: 60vh;
@@ -35,4 +50,12 @@ main {
 .alert-success {
   background: var(--success-color);
   color: #fff
+}
+
+.transparentBG {
+  background-color: rgba(0,0,0,0);
+}
+
+.page-footer {
+  background-color: rgba(0,0,0,0) !important;
 }
