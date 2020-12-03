@@ -7,7 +7,7 @@ import {
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
 import About from './pages/About';
-
+import CreateProfile from './components/CreateProfile';
 import Budget from './pages/Budget';
 import Recipient from './pages/Recipient';
 import AddRecipient from './pages/AddRecipient';
@@ -56,6 +56,7 @@ function App() {
       <Route path="/new" component={AddRecipient} />
       <Route path="/recipient/:id/addgift" component={GiftForm} />
       <Route path="/recipient/:recipientId/:id/editgift" component={EditGift} />
+      <PrivateRoute exact path="/create-profile" component={CreateProfile} />
       <PrivateRoute exact path="/recipient/:id" component={Recipient} />
       <Route path="/recipient/:id/edit" component={EditRecipient} />
       <Route component={NotFoundPage} />

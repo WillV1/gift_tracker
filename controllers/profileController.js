@@ -32,6 +32,8 @@ router.post('/', auth, async (req, res) => {
     
     const profileFields = {};
     profileFields.user = req.user.id;
+    profileFields.username = req.body.username;
+    profileFields.email = req.body.email;
 
     const newProfile = new Profile(profileFields)
 

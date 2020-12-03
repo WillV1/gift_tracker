@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from "react-router-dom";
 import { connect } from 'react-redux';
 import { getRecipient, getGift } from '../actions/recipient';
 import { editGift } from '../actions/recipient';
@@ -13,6 +14,8 @@ const EditRecipient = ({getRecipient, getGift, editGift,
   const [price, setPrice] = useState('')
   const [quantity, setQuantity] = useState('')
   const [purchased, setPurchased] = useState(false)
+
+  const history = useHistory();
 
     useEffect(() => {
       // getRecipient(match.params.id);
@@ -39,6 +42,8 @@ const EditRecipient = ({getRecipient, getGift, editGift,
       setPrice('')
       setQuantity('')
       setPurchased('')
+
+      history.goBack();
     };
 
   return (

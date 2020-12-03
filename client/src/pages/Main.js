@@ -12,7 +12,7 @@ import RecipientItem from '../components/RecipientItem';
 const Main = ({ register, getCurrentProfile, getRecipients, auth: {user}, 
   recipient: { recipients, loading}, profile: {profile} }) => {
 
-  console.log(user)
+    console.log(user);
 
   useEffect(() => {
     getRecipients();
@@ -23,10 +23,10 @@ const Main = ({ register, getCurrentProfile, getRecipients, auth: {user},
   <div className="container">
     <div className="row">
       <div className="col s10 offset-s1">
-        <h4>Welcome {user.name} !</h4>
+        <h4>Welcome {!loading && user.name} !</h4>
       </div>
     </div>
-    {profile !== null ? (
+    { user._id === recipients.user ? (
     <div className="row">
       <div className="col s3">
         <h3>Recipient</h3>
@@ -44,13 +44,12 @@ const Main = ({ register, getCurrentProfile, getRecipients, auth: {user},
       <div className="col s2">
       </div>
     </div>
-      )  : (
-        <Fragment>
-          <p>Please create a profile</p>
-          <Link to='/create-profile' className="waves-effect waves-light btn-small">
-          Create Profile</Link>
-        </Fragment>
-      )}
+      ) : null}
+      {profile === null ? (<Fragment>
+        <p>Please create a profile</p>
+        <Link to='/create-profile' className="waves-effect waves-light btn-small">
+        Create Profile</Link>
+      </Fragment>) : null}
   </div>
   
   </Fragment>
