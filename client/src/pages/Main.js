@@ -12,7 +12,13 @@ import RecipientItem from '../components/RecipientItem';
 const Main = ({ register, getCurrentProfile, getRecipients, auth: {user}, 
   recipient: { recipients, loading}, profile: {profile} }) => {
 
-    console.log(user);
+    const userId = recipients.map(recipient => recipient.user);
+
+
+    console.log(user._id);
+    console.log(userId)
+
+
 
   useEffect(() => {
     getRecipients();
@@ -26,7 +32,7 @@ const Main = ({ register, getCurrentProfile, getRecipients, auth: {user},
         <h4>Welcome {!loading && user.name} !</h4>
       </div>
     </div>
-    { user._id === recipients.user ? (
+    { user._id === userId ? (
     <div className="row">
       <div className="col s3">
         <h3>Recipient</h3>
