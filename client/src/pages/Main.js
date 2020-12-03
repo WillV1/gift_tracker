@@ -12,13 +12,13 @@ import RecipientItem from '../components/RecipientItem';
 const Main = ({ register, getCurrentProfile, getRecipients, auth: {user}, 
   recipient: { recipients, loading}, profile: {profile} }) => {
 
-    const userId = recipients.map(recipient => recipient.user);
+    // const userId = recipients.map(recipient => recipient.user);
 
+    let userId;
 
-    console.log(user._id);
-    console.log(userId)
-
-
+    for(let i = 0; i < recipients.length; i++){
+      userId = recipients[i].user
+    }
 
   useEffect(() => {
     getRecipients();
@@ -32,13 +32,17 @@ const Main = ({ register, getCurrentProfile, getRecipients, auth: {user},
         <h4>Welcome {!loading && user.name} !</h4>
       </div>
     </div>
-    { user._id === userId ? (
+    
     <div className="row">
       <div className="col s3">
         <h3>Recipient</h3>
-        {recipients.map(recipient => (
-        <RecipientItem key={recipient._id} recipient={recipient}/>
-        ))}
+        { user._id === userId ? (
+        <div>
+          {recipients.map(recipient => (
+          <RecipientItem key={recipient._id} recipient={recipient}/>
+          ))}
+        </div>
+              ) : null}
       </div>
       <div className="col s2">
       </div>
@@ -50,7 +54,7 @@ const Main = ({ register, getCurrentProfile, getRecipients, auth: {user},
       <div className="col s2">
       </div>
     </div>
-      ) : null}
+
       {profile === null ? (<Fragment>
         <p>Please create a profile</p>
         <Link to='/create-profile' className="waves-effect waves-light btn-small">
