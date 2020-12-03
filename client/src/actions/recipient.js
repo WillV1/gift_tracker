@@ -16,7 +16,7 @@ export const getRecipients = () => async dispatch => {
   } catch (err) {
     dispatch({
       type: RECIPIENT_ERROR,
-      payload: {msg: err.response.statusText, status: err.response.status}
+      payload: {msg: err, status: err}
     });
   }
 }

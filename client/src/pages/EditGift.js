@@ -8,9 +8,6 @@ import M from "materialize-css";
 const EditRecipient = ({getRecipient, getGift, editGift,  
   recipient: { recipient, loading}, match}) => {
 
-  // const giftId = recipient.gifts.map(gift => gift)
-  console.log(match.params.id);
-  console.log(recipient)
 
   const [name, setName] = useState('')
   const [price, setPrice] = useState('')
