@@ -16,7 +16,7 @@ main {
   flex: 1 0 auto;
 }
 
-nav ul li a{
+h1, nav ul li a{
   color: black;
   font-family: 'Sansita Swashed', cursive;
 } 

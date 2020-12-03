@@ -16,7 +16,6 @@ let amountRemaining;
     getRecipients();
   }, [getRecipients])
 
-  console.log(recipients)
   if(recipients.length) {
 recipientBudget  = recipients.map(recipient => recipient)
 .reduce((acc, val) => acc + val.budget, 0);
@@ -27,11 +26,6 @@ amountSpent = recipients.map(recipient => recipient.gifts.filter(gift => gift.pu
 }
 
 amountRemaining = recipientBudget - amountSpent
-
-
-
-console.log(recipientBudget);
-console.log(amountSpent);
 
 const data = {
   labels: ['Amount Remaining', 'Amount Spent'],
