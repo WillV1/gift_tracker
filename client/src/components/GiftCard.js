@@ -7,7 +7,7 @@ import { removeGift } from '../actions/recipient';
 const GiftCard = ({recipientId, gift: { _id, name, price, quantity, purchased}, 
   auth, removeGift}) => {
 
-    // console.log(_id);
+    console.log(recipientId);
   return (
     <div className="container">
       <div className="row">
@@ -25,7 +25,7 @@ const GiftCard = ({recipientId, gift: { _id, name, price, quantity, purchased},
         </div>
         <div className="col s4">
         <Link 
-        to={{ pathname:`/recipient/${_id}/editgift`, state: {gift: _id}}}
+        to={{ pathname:`/recipient/${recipientId}/${_id}/editgift`, state: {gift: _id}}}
         className="waves-effect waves-light btn-small">Edit</Link>
           <button onClick={e => removeGift(recipientId, _id)}
             className="waves-effect waves-light red btn-small">Delete</button>

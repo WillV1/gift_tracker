@@ -74,7 +74,7 @@ export default function recipients(state = initialState, action) {
         ...state,
         recipient: {
           ...state.recipient,
-          gifts: state.recipients.gifts.map(gift => gift._id === payload.id),
+          gift: payload.gift,
           loading: false
         }
       }
@@ -84,9 +84,9 @@ export default function recipients(state = initialState, action) {
         ...state,
         recipient: {
           ...state.recipient,
-          gifts: state.recipients.gifts.map(gift => gift._id === payload._id ? 
-            gift = payload : gift),
-            loading: false
+          gifts: [
+            ...state.recipient.gifts, payload.gift
+          ]
         }
       }
     case REMOVE_GIFT:

@@ -32,7 +32,7 @@ console.log(amountSpent);
   return loading ? <Spinner /> : <Fragment>
   <div className="container">
     <div className="row">
-      <div className="col s3">
+      <div className="col s10">
         <h2>Budget to Actual</h2>
       </div>
 

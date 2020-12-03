@@ -33,6 +33,11 @@ img {
   width: 150px;
   height: auto;
   border-radius: 50%;
+  padding: 20px
+}
+
+input[type=text] {
+  text-transform: capitalize;
 }
 
 .gift-font {
@@ -68,4 +73,8 @@ img {
 
 .page-footer {
   background-color: rgba(0,0,0,0) !important;
+}
+
+.brand-logo {
+  padding-left: 12px !important;
 }

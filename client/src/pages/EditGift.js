@@ -5,13 +5,11 @@ import { getRecipient, getGift } from '../actions/recipient';
 import { editGift } from '../actions/recipient';
 import M from "materialize-css";
 
-const EditRecipient = ({getRecipient, getGift, editGift, 
-
-  // gift: {gift}, 
+const EditRecipient = ({getRecipient, getGift, editGift,  
   recipient: { recipient, loading}, match}) => {
 
   // const giftId = recipient.gifts.map(gift => gift)
-  // console.log(gift);
+  console.log(match.params.id);
   console.log(recipient)
 
   const [name, setName] = useState('')
@@ -20,12 +18,9 @@ const EditRecipient = ({getRecipient, getGift, editGift,
   const [purchased, setPurchased] = useState(false)
 
     useEffect(() => {
-      getRecipient(match.params.id);
-    },[getRecipient])
-
-    useEffect(() => {
-      getGift(match.params.id);
-    },[getGift])
+      // getRecipient(match.params.id);
+      getGift(match.params.recipientId, match.params.id);
+    },[getRecipient, getGift])
 
 
     useEffect(() => {
@@ -37,7 +32,11 @@ const EditRecipient = ({getRecipient, getGift, editGift,
     const onSubmit = async e => {
       e.preventDefault();
 
-      editGift(recipient._id, {name, price, quantity, purchased});
+      const updatedGift = {
+        _id: recipient.gift._id, name, price, quantity, purchased
+      }
+
+      editGift(match.params.recipientId, recipient.gift._id, updatedGift);
       
       setName('')
       setPrice('')

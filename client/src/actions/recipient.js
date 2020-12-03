@@ -158,9 +158,10 @@ export const getGift = (recipientId, giftId) => async dispatch => {
     console.log(response);
     dispatch({
       type: GET_GIFT,
-      payload: (recipientId, giftId, response.data)
+      payload: {recipientId, giftId, gift:response.data}
     });
   } catch (err) {
+    console.log(err)
     dispatch({
       type: RECIPIENT_ERROR,
       payload: {msg: err.response.statusText, status: err.response.status}
@@ -185,7 +186,7 @@ export const editGift = (recipientId, giftId, formData) => async dispatch => {
 
     dispatch({
       type: EDIT_GIFT,
-      payload: (recipientId, giftId, response.data)
+      payload: {recipientId, giftId, gift: response.data}
     })
 
     dispatch(setAlert('Gift Edited', 'success'));
@@ -193,7 +194,7 @@ export const editGift = (recipientId, giftId, formData) => async dispatch => {
   } catch (err) {
     dispatch({
       type: RECIPIENT_ERROR,
-      payload: {msg: err.response.statusText, status: err.response.status}
+      payload: {msg: err, status: err}
     });
   }
 };
