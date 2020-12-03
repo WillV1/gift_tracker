@@ -9,6 +9,8 @@ import RecipientItem from '../components/RecipientItem';
 
 const Main = ({ register, getRecipients, auth: {user}, recipient: { recipients, loading} }) => {
 
+  console.log(user)
+
   useEffect(() => {
     getRecipients();
   }, [getRecipients])

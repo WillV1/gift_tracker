@@ -85,7 +85,7 @@ materialize-css
 mongoose
 multer
 multer-storage-cloudinary
-react-minimum-pie-chart
+react-chartjs-2
 react-redux
 react-router-dom
 redux
