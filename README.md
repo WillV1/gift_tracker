@@ -29,20 +29,22 @@ how to use the app.
 
 ## Wireframes
 
-<!-- Landing Page - user will see a randomly selected list of featured homes, and a randomly selected realtor of the month.
-![image](./assets/landing_page.png)
-House Listings - Users will be able to scroll through all existing house listings which link to each house's show page.
-![image](./assets/listing.png)
-House Show- displays house info, images, and the associated realtor.
-![image](./assets/house_Show.png)
-Realtors page - lists all realtors and links to their show pages.
-![image](./assets/realtors.png)
-Realtor Show Page - Each realtor will have their own show page, with their info and house listings.
-![image](./assets/realtor_show.png)
-cities page - shows all the cities the realty company works
-![image](./assets/cities.png)
-blog - displays blog articles written by the realtors
-![image](./assets/Blog.png) -->
+Home Page - Landing page to welcome users
+![image](./assets/Home.png)
+Signup 
+![image](./assets/SignUp.png)
+Login
+![image](./assets/LogIn.png)
+Main Page - Page listing all recipients and buttons to view or delete recipients
+![image](./assets/Main.png)
+Add Recipient
+![image](./assets/AddRecipient.png)
+Show Page - Page showing individual recipient, with image and gifts to purchase/purchased
+![image](./assets/Show.png)
+Budget Page - Page showing total budget to actual for the user
+![image](./assets/Budget.png)
+About Page - Page giving background information about application
+![image](./assets/About.png)
 
 
 ## Data Models
