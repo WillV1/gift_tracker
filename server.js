@@ -22,6 +22,7 @@ const ctrl = require('./controllers');
 const routes = require('./routes');
 
 app.use('/users', ctrl.users);
+app.use('/profile', ctrl.profile),
 app.use('/recipients', ctrl.recipients);
 app.use('/auth', routes.auth);
 
