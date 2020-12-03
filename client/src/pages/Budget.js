@@ -1,6 +1,6 @@
 import {Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import { connect } from 'react-redux';
 import { getRecipients } from '../actions/recipient';
 import Spinner from '../layout/Spinner';
@@ -72,7 +72,7 @@ const data = {
     </div>
   </div>
   <div className="chart">
-  <Pie data={data} />
+  <Doughnut data={data} />
   </div>
   
   </Fragment>
