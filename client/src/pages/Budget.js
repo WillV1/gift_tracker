@@ -22,7 +22,7 @@ recipientBudget  = recipients.map(recipient => recipient)
 
 amountSpent = recipients.map(recipient => recipient.gifts.filter(gift => gift.purchased === true)
 .reduce((acc, val) => acc + val.price, 0))
-.reduce((acc2, val2) => acc2 + val2, 0)
+.reduce((acc2, val2) => acc2 +(val2.price * val2.quantity), 0)
 }
 
 amountRemaining = recipientBudget - amountSpent
