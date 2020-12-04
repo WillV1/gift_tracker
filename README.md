@@ -104,6 +104,10 @@ uuid
 ```
 
 ## Technologies
+
+```
 Frontend - React, Materialize, CSS
 Backend - Mongoose, Express, Node
 Database - MongoDB
+
+```
