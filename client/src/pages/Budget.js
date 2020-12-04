@@ -21,9 +21,12 @@ recipientBudget  = recipients.map(recipient => recipient)
 .reduce((acc, val) => acc + val.budget, 0);
 
 amountSpent = recipients.map(recipient => recipient.gifts.filter(gift => gift.purchased === true)
-.reduce((acc, val) => acc + val.price, 0))
-.reduce((acc2, val2) => acc2 +(val2.price * val2.quantity), 0)
+.reduce((acc, val) => acc + (val.price * val.quantity), 0))
+.reduce((acc2, val2) => acc2 + val2, 0)
 }
+
+console.log(recipientBudget);
+console.log(amountSpent);
 
 amountRemaining = recipientBudget - amountSpent
 
