@@ -18,13 +18,14 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
+
     const result = await db.User.findById(req.params.id)
     .populate('recipients')
     .exec((err, recipients) => {
       if(err) console.log(err)
       console.log(recipients)
     })
-    res.json({result, data: recipients})
+    res.json({result})
   } catch (err) {
       console.log('Error on show.route', err);
       res.json({Error: 'Unable to retrieve user'})

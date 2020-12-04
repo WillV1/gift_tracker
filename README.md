@@ -31,18 +31,25 @@ how to use the app.
 
 Home Page - Landing page to welcome users
 ![image](./assets/Home.png)
+
 Signup 
 ![image](./assets/SignUp.png)
+
 Login
 ![image](./assets/LogIn.png)
+
 Main Page - Page listing all recipients and buttons to view or delete recipients
 ![image](./assets/Main.png)
+
 Add Recipient
 ![image](./assets/AddRecipient.png)
+
 Show Page - Page showing individual recipient, with image and gifts to purchase/purchased
 ![image](./assets/Show.png)
+
 Budget Page - Page showing total budget to actual for the user
 ![image](./assets/Budget.png)
+
 About Page - Page giving background information about application
 ![image](./assets/About.png)
 
