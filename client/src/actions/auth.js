@@ -19,7 +19,7 @@ export const loadUser = () => async dispatch => {
   }
 
   try {
-    const response = await axios.get('http://localhost:3001/auth');
+    const response = await axios.get('/auth');
 
     dispatch({
       type: USER_LOADED,
@@ -44,7 +44,7 @@ export const register = ({name, email, password}) => async dispatch => {
   const body = JSON.stringify({name, email, password});
 
   try {
-    const response = await axios.post('http://localhost:3001/users', body, config);
+    const response = await axios.post('/users', body, config);
 
     dispatch ({
       type: REGISTER_SUCCESS,
@@ -76,7 +76,7 @@ export const login = (email, password) => async dispatch => {
   const body = JSON.stringify({email, password});
 
   try {
-    const response = await axios.post('http://localhost:3001/auth', body, config);
+    const response = await axios.post('/auth', body, config);
 
     dispatch ({
       type: LOGIN_SUCCESS,

@@ -7,7 +7,7 @@ import { GET_RECIPIENTS, RECIPIENT_ERROR, DELETE_RECIPIENT,
 //get recipients
 export const getRecipients = () => async dispatch => {
   try {
-    const response = await axios.get('http://localhost:3001/recipients');
+    const response = await axios.get('/recipients');
 
     dispatch({
       type: GET_RECIPIENTS,
@@ -24,7 +24,7 @@ export const getRecipients = () => async dispatch => {
 //delete recipient
 export const deleteRecipient = id => async dispatch => {
   try {
-    await axios.delete(`http://localhost:3001/recipients/${id}`);
+    await axios.delete(`/recipients/${id}`);
 
     dispatch({
       type: DELETE_RECIPIENT,
@@ -52,7 +52,7 @@ export const editRecipient = (id, formData) => async dispatch => {
       }
     }
 
-    const response = await axios.put(`http://localhost:3001/recipients/${id}`, 
+    const response = await axios.put(`/recipients/${id}`, 
     formData, config);
 
     dispatch({
@@ -88,7 +88,7 @@ export const addRecipient = formData => async dispatch => {
   }
   
   try {
-    const response = await axios.post(`http://localhost:3001/recipients/`, data, config);
+    const response = await axios.post(`/recipients/`, data, config);
 
     dispatch({
       type: ADD_RECIPIENT,
@@ -107,7 +107,7 @@ export const addRecipient = formData => async dispatch => {
 //get recipient
 export const getRecipient = id => async dispatch => {
   try {
-    const response = await axios.get(`http://localhost:3001/recipients/${id}`);
+    const response = await axios.get(`/recipients/${id}`);
 
     dispatch({
       type: GET_RECIPIENT,
@@ -131,7 +131,7 @@ export const addGift = (recipientId, formData) => async dispatch => {
   }
   
   try {
-    const response = await axios.post(`http://localhost:3001/recipients/gift/${recipientId}`, formData, 
+    const response = await axios.post(`/recipients/gift/${recipientId}`, formData, 
     config);
 
     dispatch({
@@ -152,7 +152,7 @@ export const addGift = (recipientId, formData) => async dispatch => {
 //get gift
 export const getGift = (recipientId, giftId) => async dispatch => {
   try {
-    const response = await axios.get(`http://localhost:3001/recipients/gift/${recipientId}/${giftId}`);
+    const response = await axios.get(`/recipients/gift/${recipientId}/${giftId}`);
 
     console.log(response);
     dispatch({
@@ -180,7 +180,7 @@ export const editGift = (recipientId, giftId, formData) => async dispatch => {
       }
     }
 
-    const response = await axios.put(`http://localhost:3001/recipients/gift/${recipientId}/${giftId}`,
+    const response = await axios.put(`/recipients/gift/${recipientId}/${giftId}`,
     formData, config);
 
     dispatch({
@@ -202,7 +202,7 @@ export const editGift = (recipientId, giftId, formData) => async dispatch => {
 export const removeGift = (recipientId, giftId) => async dispatch => {
   
   try {
-    await axios.delete(`http://localhost:3001/recipients/gift/${recipientId}/${giftId}`);
+    await axios.delete(`/recipients/gift/${recipientId}/${giftId}`);
 
     dispatch({
       type: REMOVE_GIFT,

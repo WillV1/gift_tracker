@@ -12,10 +12,7 @@ const PORT = process.env.PORT || 3001;
 //middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true
-}));
+app.use(cors());
 
 
 //controller and routes

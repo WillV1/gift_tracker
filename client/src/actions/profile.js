@@ -11,7 +11,7 @@ import {
 export const getCurrentProfile = () => async dispatch => {
   try {
 
-    const res = await axios.get('http://localhost:3001/profile/user');
+    const res = await axios.get('/profile/user');
 
     dispatch({
       type: GET_PROFILE,
@@ -35,7 +35,7 @@ export const createProfile = (formData)  => async dispatch => {
 
     }
 
-      const response = await axios.post('http://localhost:3001/profile', formData, config);
+      const response = await axios.post('/profile', formData, config);
 
       dispatch({
         type: GET_PROFILE,
