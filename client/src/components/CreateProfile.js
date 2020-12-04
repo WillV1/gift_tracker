@@ -25,8 +25,6 @@ const CreateProfile = ({createProfile}) => {
 
     createProfile({username, email})
 
-    console.log({username, email})
-
     setFormData({
       username: '',
       email: '',

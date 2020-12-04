@@ -94,7 +94,6 @@ export const addRecipient = formData => async dispatch => {
       type: ADD_RECIPIENT,
       payload: response.data
     })
-    console.log(response.data);
     dispatch(setAlert('Recipient Added', 'success'));
 
   } catch (err) {

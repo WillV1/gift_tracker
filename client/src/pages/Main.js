@@ -25,6 +25,7 @@ const Main = ({ register, getCurrentProfile, getRecipients, auth: {user},
     getCurrentProfile();
   }, [getCurrentProfile, getRecipients])
 
+
   return loading ? <Spinner /> : <Fragment>
   <div className="container">
     <div className="row">
@@ -32,17 +33,15 @@ const Main = ({ register, getCurrentProfile, getRecipients, auth: {user},
         <h4>Welcome {!loading && user.name} !</h4>
       </div>
     </div>
-    
+    {profile !== null ? (
     <div className="row">
       <div className="col s3">
         <h3>Recipient</h3>
-        { user._id === userId &&
         <div>
           {recipients.map(recipient => (
           <RecipientItem key={recipient._id} recipient={recipient}/>
           ))}
         </div>
-        }
       </div>
       <div className="col s2">
       </div>
@@ -51,12 +50,12 @@ const Main = ({ register, getCurrentProfile, getRecipients, auth: {user},
       <div className="col s2">
       </div>
     </div>
-
-      {profile === null ? (<Fragment>
+    ) : (
+      <Fragment>
         <p>Please create a profile</p>
         <Link to='/create-profile' className="waves-effect waves-light btn-small">
         Create Profile</Link>
-      </Fragment>) : null}
+      </Fragment>)}
   </div>
   
   </Fragment>
